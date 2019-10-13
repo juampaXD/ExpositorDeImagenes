@@ -23,13 +23,19 @@ namespace ExpositorDeImagenes
         public FrmExpositor()
         {
             InitializeComponent();
+            try
+            {
+                soundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
+                VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
+                LblPorcentaje.Text = VolumenControl.Volume.ToString();
+                TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
+            }
+            catch (IndexOutOfRangeException)
+            {
 
-            //soundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
-
-            VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
-            LblPorcentaje.Text = VolumenControl.Volume.ToString();
-
-            TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
+            }
+            catch (ArgumentOutOfRangeException) { }
+            catch (NullReferenceException) { }
 
             Iniciar();
         }
@@ -169,12 +175,15 @@ namespace ExpositorDeImagenes
                 try
                 {
                     estado = true;
-
                     soundPlayer.PlayLooping();
                 }
                 catch (FileNotFoundException)
                 {
                     MessageBox.Show("Archivo de musica no encontrado, cierre el programa y añada el archivo con el nombre de cancion.wav");
+                    estado = false;
+                }
+                catch (NullReferenceException)
+                {
                     estado = false;
                 }
             }
@@ -192,10 +201,14 @@ namespace ExpositorDeImagenes
         }
         private void Limpiar()
         {
-            soundPlayer.Stop();
-            soundPlayer.Dispose();
-            estado = false;
-
+            try
+            {
+                soundPlayer.Stop();
+                soundPlayer.Dispose();
+                estado = false;
+            }
+            catch (NullReferenceException)
+            { }
             ListaDirecciones.Clear();
             checkedListBox1.Items.Clear();
 
@@ -211,13 +224,18 @@ namespace ExpositorDeImagenes
             }
             catch (IndexOutOfRangeException)
             {
-                MessageBox.Show("No se encuentra el archivo");
+                MessageBox.Show("No se encuentran los archivos");
             }
         }
 
         private void TrbVolumen_Scroll(object sender, EventArgs e)
         {
-            VolumenControl.Volume = TrbVolumen.Value;
+            try
+            {
+                VolumenControl.Volume = TrbVolumen.Value;
+            }
+            catch (NullReferenceException)
+            { }
             LblPorcentaje.Text = TrbVolumen.Value.ToString();
         }
     }
