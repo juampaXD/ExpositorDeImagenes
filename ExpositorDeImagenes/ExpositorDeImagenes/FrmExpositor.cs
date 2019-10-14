@@ -15,7 +15,6 @@ namespace ExpositorDeImagenes
         private Random rand = new Random();
         private int N;
         private bool estado = false;
-
         private SoundPlayer soundPlayer;
         private CoreAudioDevice VolumenControl;
 
@@ -23,6 +22,12 @@ namespace ExpositorDeImagenes
         public FrmExpositor()
         {
             InitializeComponent();
+            Iniciar();
+            PrepararAudios();
+        }
+
+        private void PrepararAudios()
+        {
             try
             {
                 soundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
@@ -30,14 +35,9 @@ namespace ExpositorDeImagenes
                 LblPorcentaje.Text = VolumenControl.Volume.ToString();
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
             }
-            catch (IndexOutOfRangeException)
-            {
-
-            }
-            catch (ArgumentOutOfRangeException) { }
+            catch (IndexOutOfRangeException) { }
+            catch (ArgumentOutOfRangeException) { LblPorcentaje.Text = "0"; }
             catch (NullReferenceException) { }
-
-            Iniciar();
         }
         public void Iniciar()
         {
@@ -47,7 +47,7 @@ namespace ExpositorDeImagenes
             RellenarLista();
         }
         private void RevisarCarpetas()
-        {
+        {//Crea los directorios de musica e imagenes y si existe no se ejecuta
             Directory.CreateDirectory(Environment.SpecialFolder.MyPictures.ToString());
             Directory.CreateDirectory(Environment.SpecialFolder.MyMusic.ToString());
         }
@@ -55,6 +55,11 @@ namespace ExpositorDeImagenes
         private void CargarImagenes()
         {
             /*Obtiene las imagenes*/
+            ListaImagenes = new ImageList//se simplifica y configura de manera mas sencilla
+            {
+                ColorDepth = ColorDepth.Depth32Bit,
+                ImageSize = new Size(250, 250)
+            };
 
             string[] path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg");
 
@@ -172,25 +177,31 @@ namespace ExpositorDeImagenes
         {
             if (estado == false)
             {
-                try
-                {
-                    estado = true;
-                    soundPlayer.PlayLooping();
-                }
-                catch (FileNotFoundException)
-                {
-                    MessageBox.Show("Archivo de musica no encontrado, cierre el programa y añada el archivo con el nombre de cancion.wav");
-                    estado = false;
-                }
-                catch (NullReferenceException)
-                {
-                    estado = false;
-                }
+                PonerMusica();
             }
             else
             {
                 estado = false;
                 soundPlayer.Stop();
+            }
+        }
+        private void PonerMusica()
+        {
+            try
+            {
+                estado = true;
+                soundPlayer.PlayLooping();
+                LblPorcentaje.Text = VolumenControl.Volume.ToString();
+                TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
+            }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("Archivo de musica no encontrado, añada el archivo con el nombre de cancion.wav");
+                estado = false;
+            }
+            catch (NullReferenceException)
+            {
+                estado = false;
             }
         }
 

@@ -45,9 +45,12 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(13, 13);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -100,7 +103,7 @@
             // 
             // TrbVolumen
             // 
-            this.TrbVolumen.Location = new System.Drawing.Point(430, 58);
+            this.TrbVolumen.Location = new System.Drawing.Point(431, 58);
             this.TrbVolumen.Maximum = 100;
             this.TrbVolumen.Name = "TrbVolumen";
             this.TrbVolumen.Orientation = System.Windows.Forms.Orientation.Vertical;
