@@ -140,6 +140,10 @@ namespace ExpositorDeImagenes
                 MessageBox.Show("No se encontraron archivos");
             }
         }
+        private void Repetir()
+        {
+
+        }
 
         private void Revisar(int N)
         {
@@ -181,8 +185,7 @@ namespace ExpositorDeImagenes
             }
             else
             {
-                estado = false;
-                soundPlayer.Stop();
+                PararMusica();
             }
         }
         private void PonerMusica()
@@ -204,13 +207,7 @@ namespace ExpositorDeImagenes
                 estado = false;
             }
         }
-
-        private void BtnActualizar_Click(object sender, EventArgs e)
-        {
-            Limpiar();
-            Iniciar();
-        }
-        private void Limpiar()
+        private void PararMusica()
         {
             try
             {
@@ -220,6 +217,16 @@ namespace ExpositorDeImagenes
             }
             catch (NullReferenceException)
             { }
+        }
+
+        private void BtnActualizar_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+            Iniciar();
+        }
+        private void Limpiar()
+        {
+            PararMusica();
             ListaDirecciones.Clear();
             checkedListBox1.Items.Clear();
 
