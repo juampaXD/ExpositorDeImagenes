@@ -29,30 +29,30 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmExpositor));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PicExpositor = new System.Windows.Forms.PictureBox();
             this.BtnMostrarImagen = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.ChkRepetir = new System.Windows.Forms.CheckBox();
             this.BtnMusica = new System.Windows.Forms.Button();
             this.BtnActualizar = new System.Windows.Forms.Button();
             this.TrbVolumen = new System.Windows.Forms.TrackBar();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.CklLista = new System.Windows.Forms.CheckedListBox();
             this.LblPorcentaje = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // PicExpositor
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(13, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(250, 250);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.PicExpositor.BackColor = System.Drawing.Color.White;
+            this.PicExpositor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.PicExpositor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PicExpositor.Location = new System.Drawing.Point(26, 14);
+            this.PicExpositor.Name = "PicExpositor";
+            this.PicExpositor.Size = new System.Drawing.Size(250, 250);
+            this.PicExpositor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PicExpositor.TabIndex = 0;
+            this.PicExpositor.TabStop = false;
             // 
             // BtnMostrarImagen
             // 
@@ -66,16 +66,16 @@
             this.BtnMostrarImagen.UseVisualStyleBackColor = false;
             this.BtnMostrarImagen.Click += new System.EventHandler(this.BtnMostrarImagen_Click);
             // 
-            // checkBox1
+            // ChkRepetir
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.ForeColor = System.Drawing.Color.White;
-            this.checkBox1.Location = new System.Drawing.Point(356, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(97, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Repetir imagen";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.ChkRepetir.AutoSize = true;
+            this.ChkRepetir.ForeColor = System.Drawing.Color.White;
+            this.ChkRepetir.Location = new System.Drawing.Point(356, 24);
+            this.ChkRepetir.Name = "ChkRepetir";
+            this.ChkRepetir.Size = new System.Drawing.Size(97, 17);
+            this.ChkRepetir.TabIndex = 2;
+            this.ChkRepetir.Text = "Repetir imagen";
+            this.ChkRepetir.UseVisualStyleBackColor = true;
             // 
             // BtnMusica
             // 
@@ -112,13 +112,14 @@
             this.TrbVolumen.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.TrbVolumen.Scroll += new System.EventHandler(this.TrbVolumen_Scroll);
             // 
-            // checkedListBox1
+            // CklLista
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(282, 94);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(142, 169);
-            this.checkedListBox1.TabIndex = 5;
+            this.CklLista.Enabled = false;
+            this.CklLista.FormattingEnabled = true;
+            this.CklLista.Location = new System.Drawing.Point(282, 94);
+            this.CklLista.Name = "CklLista";
+            this.CklLista.Size = new System.Drawing.Size(142, 169);
+            this.CklLista.TabIndex = 5;
             // 
             // LblPorcentaje
             // 
@@ -150,17 +151,17 @@
             this.ClientSize = new System.Drawing.Size(495, 276);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.LblPorcentaje);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.CklLista);
             this.Controls.Add(this.TrbVolumen);
             this.Controls.Add(this.BtnActualizar);
             this.Controls.Add(this.BtnMusica);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.ChkRepetir);
             this.Controls.Add(this.BtnMostrarImagen);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PicExpositor);
             this.Name = "FrmExpositor";
             this.ShowIcon = false;
             this.Text = "Expositor";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -169,13 +170,13 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PicExpositor;
         private System.Windows.Forms.Button BtnMostrarImagen;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox ChkRepetir;
         private System.Windows.Forms.Button BtnMusica;
         private System.Windows.Forms.Button BtnActualizar;
         private System.Windows.Forms.TrackBar TrbVolumen;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox CklLista;
         private System.Windows.Forms.Label LblPorcentaje;
         private System.Windows.Forms.Label label2;
     }

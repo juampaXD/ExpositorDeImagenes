@@ -41,12 +41,12 @@ namespace ExpositorDeImagenes
         }
         public void Iniciar()
         {
-            RevisarCarpetas();
+            CrearCarpetas();
             CargarImagenes();
             GenerarLista();
             RellenarLista();
         }
-        private void RevisarCarpetas()
+        private void CrearCarpetas()
         {//Crea los directorios de musica e imagenes y si existe no se ejecuta
             Directory.CreateDirectory(Environment.SpecialFolder.MyPictures.ToString());
             Directory.CreateDirectory(Environment.SpecialFolder.MyMusic.ToString());
@@ -67,7 +67,6 @@ namespace ExpositorDeImagenes
             {
                 ListaImagenes.Images.Add(i.ToString(), Image.FromFile(path[i]));
             }
-
         }
         private void CargarImagenes2()
         {
@@ -107,7 +106,7 @@ namespace ExpositorDeImagenes
         {
             for (int i = 0; i < ListaRevision.Count; i++)
             {
-                checkedListBox1.Items.Add("imagen " + (i + 1), CheckState.Unchecked);
+                CklLista.Items.Add("imagen " + (i + 1), CheckState.Unchecked);
             }
         }
 
@@ -117,22 +116,27 @@ namespace ExpositorDeImagenes
             {
                 BtnMostrarImagen.Text = "Cambiar imagen";
             }
-            GenerarNumero();
-            Revisar(N);
+            //agregar al metodo un para metro y revise si tiene que repetir o no
+            if (ChkRepetir.CheckState == CheckState.Checked)
+            {
+                GenerarNumero();
+                Revisar(N);
+            }
+            else {
+
+            }
+
         }
         private void GenerarNumero()
         {
             try
             {
                 //se revisa el numero del check si esta activo o no, para buscar otro no usado
-                do//usar metodo recursivo GenerarNumero();
+                N = rand.Next(0, CklLista.Items.Count);
+                if (CklLista.GetItemCheckState(N) != CheckState.Unchecked)
                 {
-                    N = rand.Next(0, checkedListBox1.Items.Count);
-                    if (checkedListBox1.GetItemCheckState(N) == CheckState.Unchecked)
-                    {
-                        break;
-                    }
-                } while (true);
+                    GenerarNumero();
+                }
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -150,10 +154,10 @@ namespace ExpositorDeImagenes
             int contador = 0;
             try
             {
-                checkedListBox1.SetItemChecked(N, true);
+                CklLista.SetItemChecked(N, true);
                 ListaRevision[N] = true;
 
-                pictureBox1.BackgroundImage = ListaImagenes.Images[N];
+                PicExpositor.BackgroundImage = ListaImagenes.Images[N];
 
                 foreach (var item in ListaRevision)
                 {
@@ -166,15 +170,15 @@ namespace ExpositorDeImagenes
                 {
                     MessageBox.Show($"Todas las imagenes se mostraron ({ListaRevision.Count})");//interpolación
                     GenerarLista();
-                    pictureBox1.BackgroundImage = null;
-                    for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                    PicExpositor.BackgroundImage = null;
+                    for (int i = 0; i < CklLista.Items.Count; i++)
                     {
-                        checkedListBox1.SetItemChecked(i, false);
+                        CklLista.SetItemChecked(i, false);
                     }
                 }
             }
             catch (ArgumentOutOfRangeException)
-            {}
+            { }
         }
         private void BtnMusica_Click(object sender, EventArgs e)
         {
@@ -227,14 +231,14 @@ namespace ExpositorDeImagenes
         {
             PararMusica();
             ListaRevision.Clear();
-            checkedListBox1.Items.Clear();
+            CklLista.Items.Clear();
 
-            if (pictureBox1.Image != null)
+            if (PicExpositor.Image != null)
             {
-                pictureBox1.Image.Dispose();
+                PicExpositor.Image.Dispose();
             }
 
-            pictureBox1.BackColor = Color.White;
+            PicExpositor.BackColor = Color.White;
             try
             {
                 soundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
