@@ -164,7 +164,7 @@ namespace ExpositorDeImagenes
                 }
                 if (contador == ListaDirecciones.Count)
                 {
-                    MessageBox.Show("Todas las imagenes se mostraron (" + ListaDirecciones.Count + ")");
+                    MessageBox.Show($"Todas las imagenes se mostraron ({ListaDirecciones.Count})");//interpolación
                     GenerarLista();
                     pictureBox1.BackgroundImage = null;
                     for (int i = 0; i < checkedListBox1.Items.Count; i++)
@@ -174,8 +174,7 @@ namespace ExpositorDeImagenes
                 }
             }
             catch (ArgumentOutOfRangeException)
-            {
-            }
+            {}
         }
         private void BtnMusica_Click(object sender, EventArgs e)
         {
