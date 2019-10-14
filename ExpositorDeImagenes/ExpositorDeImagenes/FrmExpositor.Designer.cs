@@ -69,12 +69,14 @@
             // ChkRepetir
             // 
             this.ChkRepetir.AutoSize = true;
+            this.ChkRepetir.Checked = true;
+            this.ChkRepetir.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChkRepetir.ForeColor = System.Drawing.Color.White;
             this.ChkRepetir.Location = new System.Drawing.Point(356, 24);
             this.ChkRepetir.Name = "ChkRepetir";
-            this.ChkRepetir.Size = new System.Drawing.Size(97, 17);
+            this.ChkRepetir.Size = new System.Drawing.Size(77, 17);
             this.ChkRepetir.TabIndex = 2;
-            this.ChkRepetir.Text = "Repetir imagen";
+            this.ChkRepetir.Text = "No Repetir";
             this.ChkRepetir.UseVisualStyleBackColor = true;
             // 
             // BtnMusica
@@ -97,7 +99,7 @@
             this.BtnActualizar.Location = new System.Drawing.Point(356, 52);
             this.BtnActualizar.Name = "BtnActualizar";
             this.BtnActualizar.Size = new System.Drawing.Size(68, 38);
-            this.BtnActualizar.TabIndex = 3;
+            this.BtnActualizar.TabIndex = 4;
             this.BtnActualizar.UseVisualStyleBackColor = false;
             this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             // 
@@ -108,7 +110,7 @@
             this.TrbVolumen.Name = "TrbVolumen";
             this.TrbVolumen.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.TrbVolumen.Size = new System.Drawing.Size(45, 211);
-            this.TrbVolumen.TabIndex = 4;
+            this.TrbVolumen.TabIndex = 5;
             this.TrbVolumen.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.TrbVolumen.Scroll += new System.EventHandler(this.TrbVolumen_Scroll);
             // 

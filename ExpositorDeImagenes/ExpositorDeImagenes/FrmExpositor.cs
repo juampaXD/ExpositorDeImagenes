@@ -116,26 +116,19 @@ namespace ExpositorDeImagenes
             {
                 BtnMostrarImagen.Text = "Cambiar imagen";
             }
-            //agregar al metodo un para metro y revise si tiene que repetir o no
-            if (ChkRepetir.CheckState == CheckState.Checked)
-            {
-                GenerarNumero();
-                Revisar(N);
-            }
-            else {
-
-            }
-
+            EscogerNumero(); //elige un numero
+            MostrarImagen(N);
         }
-        private void GenerarNumero()
+        private void EscogerNumero()
         {
             try
             {
-                //se revisa el numero del check si esta activo o no, para buscar otro no usado
                 N = rand.Next(0, CklLista.Items.Count);
-                if (CklLista.GetItemCheckState(N) != CheckState.Unchecked)
-                {
-                    GenerarNumero();
+                /**Cuando este activo la repeticion este se llama constantemente a si mismo
+                 * hasta tener uno que no este en la lista**/
+                if (CklLista.GetItemCheckState(N) == CheckState.Checked && ChkRepetir.Checked)
+                { //se revisa el numero del check si esta activo o no, para buscar otro no usado
+                    EscogerNumero();
                 }
             }
             catch (ArgumentOutOfRangeException)
@@ -144,21 +137,15 @@ namespace ExpositorDeImagenes
                 MessageBox.Show("No se encontraron archivos");
             }
         }
-        private void Repetir()
-        {
 
-        }
-
-        private void Revisar(int N)
+        private void MostrarImagen(int N)
         {
             int contador = 0;
+            PicExpositor.BackgroundImage = ListaImagenes.Images[N];
             try
             {
                 CklLista.SetItemChecked(N, true);
                 ListaRevision[N] = true;
-
-                PicExpositor.BackgroundImage = ListaImagenes.Images[N];
-
                 foreach (var item in ListaRevision)
                 {
                     if (item == true)
@@ -169,13 +156,15 @@ namespace ExpositorDeImagenes
                 if (contador == ListaRevision.Count)
                 {
                     MessageBox.Show($"Todas las imagenes se mostraron ({ListaRevision.Count})");//interpolación
-                    GenerarLista();
+                    GenerarLista();//en este limpia la lista de revision
                     PicExpositor.BackgroundImage = null;
+                    //reinicia los checks
                     for (int i = 0; i < CklLista.Items.Count; i++)
                     {
                         CklLista.SetItemChecked(i, false);
                     }
                 }
+
             }
             catch (ArgumentOutOfRangeException)
             { }
