@@ -10,7 +10,7 @@ namespace ExpositorDeImagenes
 {
     public partial class FrmExpositor : Form
     {
-        private List<bool> ListaDirecciones = new List<bool>();
+        private List<bool> ListaRevision = new List<bool>();
         private ImageList ListaImagenes;
         private Random rand = new Random();
         private int N;
@@ -87,25 +87,25 @@ namespace ExpositorDeImagenes
 
         private void GenerarLista()
         {
-            if (ListaDirecciones.Count == 0)
+            if (ListaRevision.Count == 0)
             {
                 for (int i = 0; i < Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length; i++)
                 {
-                    ListaDirecciones.Add(false);
+                    ListaRevision.Add(false);
                 }
             }
             else
             {
                 for (int i = 0; i < Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length; i++)
                 {
-                    ListaDirecciones[i] = false;
+                    ListaRevision[i] = false;
                 }
             }
         }
 
         private void RellenarLista()
         {
-            for (int i = 0; i < ListaDirecciones.Count; i++)
+            for (int i = 0; i < ListaRevision.Count; i++)
             {
                 checkedListBox1.Items.Add("imagen " + (i + 1), CheckState.Unchecked);
             }
@@ -151,20 +151,20 @@ namespace ExpositorDeImagenes
             try
             {
                 checkedListBox1.SetItemChecked(N, true);
-                ListaDirecciones[N] = true;
+                ListaRevision[N] = true;
 
                 pictureBox1.BackgroundImage = ListaImagenes.Images[N];
 
-                foreach (var item in ListaDirecciones)
+                foreach (var item in ListaRevision)
                 {
                     if (item == true)
                     {
                         contador++;
                     }
                 }
-                if (contador == ListaDirecciones.Count)
+                if (contador == ListaRevision.Count)
                 {
-                    MessageBox.Show($"Todas las imagenes se mostraron ({ListaDirecciones.Count})");//interpolación
+                    MessageBox.Show($"Todas las imagenes se mostraron ({ListaRevision.Count})");//interpolación
                     GenerarLista();
                     pictureBox1.BackgroundImage = null;
                     for (int i = 0; i < checkedListBox1.Items.Count; i++)
@@ -226,7 +226,7 @@ namespace ExpositorDeImagenes
         private void Limpiar()
         {
             PararMusica();
-            ListaDirecciones.Clear();
+            ListaRevision.Clear();
             checkedListBox1.Items.Clear();
 
             if (pictureBox1.Image != null)
