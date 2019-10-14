@@ -71,18 +71,17 @@ namespace ExpositorDeImagenes
         }
         private void CargarImagenes2()
         {
+            ListaImagenes = new ImageList//se simplifica y configura de manera mas sencilla
+            {
+                ColorDepth = ColorDepth.Depth32Bit,
+                ImageSize = new Size(250, 250)
+            };
             List<string> path2 = new List<string>();
 
             for (int i = 0; i < Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length; i++)
             {
                 path2.Add(Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").ToString());
-
-            }
-            int s = 0;
-            foreach (var item in path2)
-            {
-                ListaImagenes.Images.Add(s.ToString(), Image.FromFile(item));
-                s++;
+                ListaImagenes.Images.Add(i.ToString(), Image.FromFile(path2[i]));
             }
         }
 
@@ -125,7 +124,8 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                do
+                //se revisa el numero del check si esta activo o no, para buscar otro no usado
+                do//usar metodo recursivo GenerarNumero();
                 {
                     N = rand.Next(0, checkedListBox1.Items.Count);
                     if (checkedListBox1.GetItemCheckState(N) == CheckState.Unchecked)
