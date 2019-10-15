@@ -7,6 +7,7 @@ using AudioSwitcher.AudioApi.CoreAudio; //api para el control del volumen
 using System.IO;
 
 namespace ExpositorDeImagenes
+
 {
     public partial class FrmExpositor : Form
     {
@@ -18,12 +19,18 @@ namespace ExpositorDeImagenes
         private SoundPlayer soundPlayer;
         private CoreAudioDevice VolumenControl;
 
-
         public FrmExpositor()
         {
             InitializeComponent();
             Iniciar();
             PrepararAudios();
+        }
+        public void Iniciar()
+        {
+            CrearCarpetas();
+            CargarImagenes();
+            GenerarLista();
+            RellenarLista();
         }
 
         private void PrepararAudios()
@@ -39,13 +46,7 @@ namespace ExpositorDeImagenes
             catch (ArgumentOutOfRangeException) { LblPorcentaje.Text = "0"; }
             catch (NullReferenceException) { }
         }
-        public void Iniciar()
-        {
-            CrearCarpetas();
-            CargarImagenes();
-            GenerarLista();
-            RellenarLista();
-        }
+        
         private void CrearCarpetas()
         {//Crea los directorios de musica e imagenes y si existe no se ejecuta
             Directory.CreateDirectory(Environment.SpecialFolder.MyPictures.ToString());
@@ -60,27 +61,17 @@ namespace ExpositorDeImagenes
                 ColorDepth = ColorDepth.Depth32Bit,
                 ImageSize = new Size(250, 250)
             };
-
             string[] path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg");
-
-            for (int i = 0; i < path.Length; i++)
+            //List<string> path2 = new List<string>();
+            //for (int i = 0; i < path.Length; i++)
+            //{
+            //    ListaImagenes.Images.Add(i.ToString(), Image.FromFile(path[i]));
+            //}
+            int i = 0;
+            foreach (var item in path)
             {
+                //path2.Add(Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg")[i]);
                 ListaImagenes.Images.Add(i.ToString(), Image.FromFile(path[i]));
-            }
-        }
-        private void CargarImagenes2()
-        {
-            ListaImagenes = new ImageList//se simplifica y configura de manera mas sencilla
-            {
-                ColorDepth = ColorDepth.Depth32Bit,
-                ImageSize = new Size(250, 250)
-            };
-            List<string> path2 = new List<string>();
-
-            for (int i = 0; i < Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length; i++)
-            {
-                path2.Add(Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").ToString());
-                ListaImagenes.Images.Add(i.ToString(), Image.FromFile(path2[i]));
             }
         }
 
