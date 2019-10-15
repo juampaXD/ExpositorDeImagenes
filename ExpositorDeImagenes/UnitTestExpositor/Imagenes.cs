@@ -5,14 +5,19 @@ using ExpositorDeImagenes;
 namespace UnitTestExpositor
 {
     [TestClass]
-    public class UnitTest1
+    public class Imagenes
     {
         FrmExpositor expositor;
-
-    [TestMethod]
+        
+        [TestInitialize]
+        private void Iniciar()
+        {
+            expositor = new FrmExpositor();
+        }
+        [TestMethod]
         public void TestMethod1()
         {
-            
+            //Assert.IsTrue();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace ExpositorDeImagenes
             Iniciar();
             PrepararAudios();
         }
-        public void Iniciar()
+        private void Iniciar()
         {
             CrearCarpetas();
             CargarImagenes();
@@ -46,7 +46,7 @@ namespace ExpositorDeImagenes
             catch (ArgumentOutOfRangeException) { LblPorcentaje.Text = "0"; }
             catch (NullReferenceException) { }
         }
-        
+
         private void CrearCarpetas()
         {//Crea los directorios de musica e imagenes y si existe no se ejecuta
             Directory.CreateDirectory(Environment.SpecialFolder.MyPictures.ToString());
