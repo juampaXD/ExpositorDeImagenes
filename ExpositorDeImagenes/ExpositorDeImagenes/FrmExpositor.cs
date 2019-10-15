@@ -12,11 +12,11 @@ namespace ExpositorDeImagenes
     public partial class FrmExpositor : Form
     {
         private List<bool> ListaRevision = new List<bool>();
-        private ImageList ListaImagenes;
-        private Random rand = new Random();
-        private int N;
-        private bool estado = false;
-        private SoundPlayer soundPlayer;
+        private ImageList ListaImagenes { set; get; }
+        private Random Rand = new Random();
+        private int N { set; get; }
+        private bool Estado { set; get; } = false;
+        private SoundPlayer SoundPlayer { set; get; }
         private CoreAudioDevice VolumenControl;
 
         public FrmExpositor()
@@ -37,7 +37,7 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                soundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
+                SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
                 VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
                 LblPorcentaje.Text = VolumenControl.Volume.ToString();
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
@@ -72,6 +72,7 @@ namespace ExpositorDeImagenes
             {
                 //path2.Add(Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg")[i]);
                 ListaImagenes.Images.Add(i.ToString(), Image.FromFile(path[i]));
+                i++;
             }
         }
 
@@ -114,7 +115,7 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                N = rand.Next(0, CklLista.Items.Count);
+                N = Rand.Next(0, CklLista.Items.Count);
                 /**Cuando este activo la repeticion este se llama constantemente a si mismo
                  * hasta tener uno que no este en la lista**/
                 if (CklLista.GetItemCheckState(N) == CheckState.Checked && ChkRepetir.Checked)
@@ -155,14 +156,15 @@ namespace ExpositorDeImagenes
                         CklLista.SetItemChecked(i, false);
                     }
                 }
-
+                
             }
             catch (ArgumentOutOfRangeException)
             { }
+            
         }
         private void BtnMusica_Click(object sender, EventArgs e)
         {
-            if (estado == false)
+            if (Estado == false)
             {
                 PonerMusica();
             }
@@ -175,28 +177,28 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                estado = true;
-                soundPlayer.PlayLooping();
+                Estado = true;
+                SoundPlayer.PlayLooping();
                 LblPorcentaje.Text = VolumenControl.Volume.ToString();
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
             }
             catch (FileNotFoundException)
             {
                 MessageBox.Show("Archivo de musica no encontrado, añada el archivo con el nombre de cancion.wav");
-                estado = false;
+                Estado = false;
             }
             catch (NullReferenceException)
             {
-                estado = false;
+                Estado = false;
             }
         }
         private void PararMusica()
         {
             try
             {
-                soundPlayer.Stop();
-                soundPlayer.Dispose();
-                estado = false;
+                SoundPlayer.Stop();
+                SoundPlayer.Dispose();
+                Estado = false;
             }
             catch (NullReferenceException)
             { }
@@ -221,7 +223,7 @@ namespace ExpositorDeImagenes
             PicExpositor.BackColor = Color.White;
             try
             {
-                soundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
+                SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
             }
             catch (IndexOutOfRangeException)
             {
