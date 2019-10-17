@@ -12,11 +12,12 @@ namespace ExpositorDeImagenes
     public partial class FrmExpositor : Form
     {
         private List<bool> ListaRevision = new List<bool>();
-        private ImageList ListaImagenes { set; get; }
+        private ImageList ListaImagenes;
         private Random Rand = new Random();
-        private int N { set; get; }
-        private bool Estado { set; get; } = false;
-        private SoundPlayer SoundPlayer { set; get; }
+        private int N;
+        private bool Estado = false;
+        private bool Repetir = true;
+        private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
 
         public FrmExpositor()
@@ -62,15 +63,9 @@ namespace ExpositorDeImagenes
                 ImageSize = new Size(250, 250)
             };
             string[] path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg");
-            //List<string> path2 = new List<string>();
-            //for (int i = 0; i < path.Length; i++)
-            //{
-            //    ListaImagenes.Images.Add(i.ToString(), Image.FromFile(path[i]));
-            //}
             int i = 0;
             foreach (var item in path)
             {
-                //path2.Add(Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg")[i]);
                 ListaImagenes.Images.Add(i.ToString(), Image.FromFile(path[i]));
                 i++;
             }
@@ -108,19 +103,21 @@ namespace ExpositorDeImagenes
             {
                 BtnMostrarImagen.Text = "Cambiar imagen";
             }
-            EscogerNumero(); //elige un numero
+            EscogerNumero(ListaRevision, CklLista.Items.Count, Repetir); //elige un numero
             MostrarImagen(N);
         }
-        private void EscogerNumero()
+        protected void EscogerNumero(List<bool> l, int x, bool r)
         {
             try
             {
-                N = Rand.Next(0, CklLista.Items.Count);
-                /**Cuando este activo la repeticion este se llama constantemente a si mismo
-                 * hasta tener uno que no este en la lista**/
-                if (CklLista.GetItemCheckState(N) == CheckState.Checked && ChkRepetir.Checked)
-                { //se revisa el numero del check si esta activo o no, para buscar otro no usado
-                    EscogerNumero();
+                N = Rand.Next(0, x);
+                /**
+                 * l=> la lista de booleanos
+                 * x=> numero maximo al azar para escoger el número
+                 * r=> true si para no repetir**/
+                if (l[N] == true && r)
+                {
+                    EscogerNumero(l, x, r);
                 }
             }
             catch (ArgumentOutOfRangeException)
@@ -244,6 +241,11 @@ namespace ExpositorDeImagenes
             catch (NullReferenceException)
             { }
             LblPorcentaje.Text = TrbVolumen.Value.ToString();
+        }
+
+        private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
+        {
+            Repetir = (ChkRepetir.Checked == true) ? true : false;
         }
     }
 }

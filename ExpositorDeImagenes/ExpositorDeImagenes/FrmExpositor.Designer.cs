@@ -78,6 +78,7 @@
             this.ChkRepetir.TabIndex = 2;
             this.ChkRepetir.Text = "No Repetir";
             this.ChkRepetir.UseVisualStyleBackColor = true;
+            this.ChkRepetir.CheckedChanged += new System.EventHandler(this.ChkRepetir_CheckedChanged);
             // 
             // BtnMusica
             // 
