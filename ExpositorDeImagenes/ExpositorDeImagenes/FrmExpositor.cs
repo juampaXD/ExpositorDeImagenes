@@ -14,9 +14,9 @@ namespace ExpositorDeImagenes
         private List<bool> ListaRevision = new List<bool>();
         private ImageList ListaImagenes;
         private Random Rand = new Random();
-        private int N;
+        public int N;
         private bool Estado = false;
-        private bool Repetir = true;
+        private bool NoRepetir = true;
         private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
 
@@ -34,7 +34,7 @@ namespace ExpositorDeImagenes
             RellenarLista();
         }
 
-        public void PrepararAudios()
+        private void PrepararAudios()
         {
             try
             {
@@ -103,10 +103,10 @@ namespace ExpositorDeImagenes
             {
                 BtnMostrarImagen.Text = "Cambiar imagen";
             }
-            EscogerNumero(ListaRevision, CklLista.Items.Count, Repetir); //elige un numero
+            EscogerNumero(ListaRevision, CklLista.Items.Count, NoRepetir); //elige un numero
             MostrarImagen(N);
         }
-        protected void EscogerNumero(List<bool> l, int x, bool r)
+        public void EscogerNumero(List<bool> l, int x, bool r)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace ExpositorDeImagenes
             catch (ArgumentOutOfRangeException)
             {
                 BtnMostrarImagen.Text = "Mostrar imagen";
-                MessageBox.Show("No se encontraron archivos");
+                MessageBox.Show("No se encontraron imagenes para mostrar","Aviso",MessageBoxButtons.OK);
             }
         }
 
@@ -245,7 +245,7 @@ namespace ExpositorDeImagenes
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
         {
-            Repetir = (ChkRepetir.Checked == true) ? true : false;
+            NoRepetir = (ChkRepetir.Checked == true) ? true : false;
         }
     }
 }
