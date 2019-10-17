@@ -37,7 +37,7 @@ namespace ExpositorDeImagenes
         private void PrepararAudios()
         {
             try
-            {
+            {//Aqui se puede organizar para que convierta de mp3 a wav
                 SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
                 VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
                 LblPorcentaje.Text = VolumenControl.Volume.ToString();
@@ -123,7 +123,7 @@ namespace ExpositorDeImagenes
             catch (ArgumentOutOfRangeException)
             {
                 BtnMostrarImagen.Text = "Mostrar imagen";
-                MessageBox.Show("No se encontraron imagenes para mostrar","Aviso",MessageBoxButtons.OK);
+                MessageBox.Show("No se encontraron imagenes para mostrar", "Aviso", MessageBoxButtons.OK);
             }
         }
 
