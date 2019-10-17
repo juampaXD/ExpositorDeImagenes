@@ -33,7 +33,7 @@ namespace ExpositorDeImagenes
             RellenarLista();
         }
 
-        private void PrepararAudios()
+        public void PrepararAudios()
         {
             try
             {
@@ -156,11 +156,11 @@ namespace ExpositorDeImagenes
                         CklLista.SetItemChecked(i, false);
                     }
                 }
-                
+
             }
             catch (ArgumentOutOfRangeException)
             { }
-            
+
         }
         private void BtnMusica_Click(object sender, EventArgs e)
         {
@@ -202,6 +202,10 @@ namespace ExpositorDeImagenes
             }
             catch (NullReferenceException)
             { }
+        }
+        private void ConvertiraWav()
+        {
+
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
