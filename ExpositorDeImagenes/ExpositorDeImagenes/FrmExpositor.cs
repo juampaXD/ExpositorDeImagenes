@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Media;
-using AudioSwitcher.AudioApi.CoreAudio; //api para el control del volumen
+using AudioSwitcher.AudioApi.CoreAudio; //Nuget para el control del volumen
 using System.IO;
 using NAudio.Wave;
 
@@ -25,7 +25,6 @@ namespace ExpositorDeImagenes
         {
             InitializeComponent();
             Iniciar();
-            PrepararAudios();
         }
         private void Iniciar()
         {
@@ -33,6 +32,7 @@ namespace ExpositorDeImagenes
             CargarImagenes();
             GenerarLista();
             RellenarLista();
+            PrepararAudios();
         }
 
         private void PrepararAudios()
@@ -45,7 +45,7 @@ namespace ExpositorDeImagenes
                 LblPorcentaje.Text = VolumenControl.Volume.ToString();
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
             }
-            catch (IndexOutOfRangeException) { MessageBox.Show("Archivo de musica no encontrado"); }
+            catch (IndexOutOfRangeException) { }
             catch (ArgumentOutOfRangeException) { LblPorcentaje.Text = "0"; }
             catch (NullReferenceException) { MessageBox.Show("Dispositivo de reprodución no encontrado"); }
         }
@@ -125,7 +125,6 @@ namespace ExpositorDeImagenes
             catch (ArgumentOutOfRangeException)
             {
                 BtnMostrarImagen.Text = "Mostrar imagen";
-                MessageBox.Show("No se encontraron imagenes para mostrar", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
