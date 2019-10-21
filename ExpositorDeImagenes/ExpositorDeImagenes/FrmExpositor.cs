@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Media;
 using AudioSwitcher.AudioApi.CoreAudio; //api para el control del volumen
 using System.IO;
+using NAudio.Wave;
 
 namespace ExpositorDeImagenes
 
@@ -37,7 +38,8 @@ namespace ExpositorDeImagenes
         private void PrepararAudios()
         {
             try
-            {//Aqui se puede organizar para que convierta de mp3 a wav
+            {
+                ConvertiraWav(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString()));
                 SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
                 VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
                 LblPorcentaje.Text = VolumenControl.Volume.ToString();
@@ -123,7 +125,7 @@ namespace ExpositorDeImagenes
             catch (ArgumentOutOfRangeException)
             {
                 BtnMostrarImagen.Text = "Mostrar imagen";
-                MessageBox.Show("No se encontraron imagenes para mostrar", "Aviso", MessageBoxButtons.OK);
+                MessageBox.Show("No se encontraron imagenes para mostrar", "Aviso", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
             }
         }
 
@@ -200,9 +202,15 @@ namespace ExpositorDeImagenes
             catch (NullReferenceException)
             { }
         }
-        private void ConvertiraWav()
+        private void ConvertiraWav(string []x)
         {
-
+            if (x[0].ToLower().Contains(".mp3"))
+            {
+                Mp3FileReader mp3 = new Mp3FileReader(x[0]);
+                WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(mp3);
+                WaveFileWriter.CreateWaveFile("Musica.wav", pcm);//crea un archivo wav
+                File.Move(Application.StartupPath.ToString() + @"\Musica.wav",Environment.SpecialFolder.MyMusic.ToString()+@"\Musica.wav");
+            }
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
