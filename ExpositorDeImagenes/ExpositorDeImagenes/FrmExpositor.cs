@@ -45,9 +45,9 @@ namespace ExpositorDeImagenes
                 LblPorcentaje.Text = VolumenControl.Volume.ToString();
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
             }
-            catch (IndexOutOfRangeException) { }
+            catch (IndexOutOfRangeException) { MessageBox.Show("Archivo de musica no encontrado"); }
             catch (ArgumentOutOfRangeException) { LblPorcentaje.Text = "0"; }
-            catch (NullReferenceException) { }
+            catch (NullReferenceException) { MessageBox.Show("Dispositivo de reprodución no encontrado"); }
         }
 
         private void CrearCarpetas()
@@ -125,7 +125,7 @@ namespace ExpositorDeImagenes
             catch (ArgumentOutOfRangeException)
             {
                 BtnMostrarImagen.Text = "Mostrar imagen";
-                MessageBox.Show("No se encontraron imagenes para mostrar", "Aviso", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("No se encontraron imagenes para mostrar", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -158,7 +158,7 @@ namespace ExpositorDeImagenes
 
             }
             catch (ArgumentOutOfRangeException)
-            { }
+            { MessageBox.Show("imagenes no encontradas"); }
 
         }
         private void BtnMusica_Click(object sender, EventArgs e)
@@ -183,11 +183,12 @@ namespace ExpositorDeImagenes
             }
             catch (FileNotFoundException)
             {
-                MessageBox.Show("Archivo de musica no encontrado, añada el archivo con el nombre de cancion.wav");
+                MessageBox.Show("Archivo de musica no encontrado");
                 Estado = false;
             }
             catch (NullReferenceException)
             {
+                MessageBox.Show("Archivo de musica no encontrado");
                 Estado = false;
             }
         }
@@ -198,29 +199,30 @@ namespace ExpositorDeImagenes
                 SoundPlayer.Stop();
                 SoundPlayer.Dispose();
                 Estado = false;
+                TrbVolumen.Value = 0;
+                LblPorcentaje.Text = "0";
             }
             catch (NullReferenceException)
             { }
         }
-        private void ConvertiraWav(string []x)
+        private void ConvertiraWav(string[] x)
         {
             if (x[0].ToLower().Contains(".mp3"))
             {
                 Mp3FileReader mp3 = new Mp3FileReader(x[0]);
                 WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(mp3);
                 WaveFileWriter.CreateWaveFile("Musica.wav", pcm);//crea un archivo wav
-                File.Move(Application.StartupPath.ToString() + @"\Musica.wav",Environment.SpecialFolder.MyMusic.ToString()+@"\Musica.wav");
+                File.Move(Application.StartupPath.ToString() + @"\Musica.wav", Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
             }
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
-            Limpiar();
-            Iniciar();
+            Actulizar();
         }
-        private void Limpiar()
+        private void Actulizar()
         {
-            PararMusica();
+            PararMusica();//paramos en caso de que este reproduciendo
             ListaRevision.Clear();
             CklLista.Items.Clear();
 
@@ -228,16 +230,9 @@ namespace ExpositorDeImagenes
             {
                 PicExpositor.Image.Dispose();
             }
-
+            GenerarLista();
+            RellenarLista();
             PicExpositor.BackColor = Color.White;
-            try
-            {
-                SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
-            }
-            catch (IndexOutOfRangeException)
-            {
-                MessageBox.Show("No se encuentran los archivos");
-            }
         }
 
         private void TrbVolumen_Scroll(object sender, EventArgs e)
