@@ -131,9 +131,9 @@ namespace ExpositorDeImagenes
         private void MostrarImagen(int N)
         {
             int contador = 0;
-            PicExpositor.BackgroundImage = ListaImagenes.Images[N];
             try
             {
+                PicExpositor.BackgroundImage = ListaImagenes.Images[N];
                 CklLista.SetItemChecked(N, true);
                 ListaRevision[N] = true;
                 foreach (var item in ListaRevision)
