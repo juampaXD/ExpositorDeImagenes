@@ -177,7 +177,7 @@ namespace ExpositorDeImagenes
             {
                 Estado = true;
                 SoundPlayer.PlayLooping();
-                LblPorcentaje.Text = VolumenControl.Volume.ToString();
+                LblPorcentaje.Text = VolumenControl.Volume.ToString()+"%";
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
             }
             catch (FileNotFoundException)
@@ -199,7 +199,7 @@ namespace ExpositorDeImagenes
                 SoundPlayer.Dispose();
                 Estado = false;
                 TrbVolumen.Value = 0;
-                LblPorcentaje.Text = "0";
+                LblPorcentaje.Text = "0%";
             }
             catch (NullReferenceException)
             { }
