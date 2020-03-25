@@ -16,8 +16,7 @@ namespace ExpositorDeImagenes
         private ImageList ListaImagenes;
         private Random Rand = new Random();
         public int N;
-        private bool Estado = false;
-        private bool NoRepetir = true;
+        private bool Estado = false, NoRepetir = true;
         private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
 
@@ -42,12 +41,15 @@ namespace ExpositorDeImagenes
                 ConvertiraWav(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString()));
                 SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
                 VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
-                LblPorcentaje.Text = VolumenControl.Volume.ToString();
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
             }
-            catch (IndexOutOfRangeException) { }
-            catch (ArgumentOutOfRangeException) { LblPorcentaje.Text = "0"; }
-            catch (NullReferenceException) { MessageBox.Show("Dispositivo de reprodución no encontrado"); }
+            catch (NullReferenceException) { MessageBox.Show("Dispositivo de reprodución no encontrado o no instalado"); }
+            catch (Exception e) {
+                if (e is ArgumentOutOfRangeException || e is IndexOutOfRangeException)
+                {
+                    LblPorcentaje.Text = "0";
+                }
+            }
         }
 
         private void CrearCarpetas()
@@ -187,6 +189,7 @@ namespace ExpositorDeImagenes
             }
             catch (NullReferenceException)
             {
+                LblPorcentaje.Text = "0%";
                 MessageBox.Show("Archivo de musica no encontrado");
                 Estado = false;
             }
@@ -248,6 +251,21 @@ namespace ExpositorDeImagenes
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
         {
             NoRepetir = (ChkRepetir.Checked == true) ? true : false;
+        }
+
+        private void TrbVolumen_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                TrbVolumen.Text = VolumenControl.Volume.ToString();
+            }
+            catch (Exception ex)
+            {
+                if (ex is NullReferenceException)
+                {
+
+                }
+            }
         }
     }
 }
