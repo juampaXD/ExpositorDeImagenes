@@ -105,6 +105,7 @@
             // 
             // TrbVolumen
             // 
+            this.TrbVolumen.Enabled = false;
             this.TrbVolumen.Location = new System.Drawing.Point(573, 44);
             this.TrbVolumen.Maximum = 100;
             this.TrbVolumen.Name = "TrbVolumen";
@@ -113,7 +114,6 @@
             this.TrbVolumen.TabIndex = 5;
             this.TrbVolumen.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.TrbVolumen.Scroll += new System.EventHandler(this.TrbVolumen_Scroll);
-            this.TrbVolumen.ValueChanged += new System.EventHandler(this.TrbVolumen_ValueChanged);
             // 
             // CklLista
             // 
