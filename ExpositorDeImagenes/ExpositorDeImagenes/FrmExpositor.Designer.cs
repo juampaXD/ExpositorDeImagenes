@@ -105,7 +105,6 @@
             // 
             // TrbVolumen
             // 
-            this.TrbVolumen.Enabled = false;
             this.TrbVolumen.Location = new System.Drawing.Point(573, 44);
             this.TrbVolumen.Maximum = 100;
             this.TrbVolumen.Name = "TrbVolumen";

@@ -42,12 +42,13 @@ namespace ExpositorDeImagenes
                 SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
                 VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
+
             }
             catch (NullReferenceException) { MessageBox.Show("Dispositivo de reprodución no encontrado o no instalado"); }
             catch (Exception e) {
                 if (e is ArgumentOutOfRangeException || e is IndexOutOfRangeException)
                 {
-                    LblPorcentaje.Text = "0";
+                    TrbVolumen.Value = 0;
                 }
             }
         }
@@ -179,8 +180,8 @@ namespace ExpositorDeImagenes
             {
                 Estado = true;
                 SoundPlayer.PlayLooping();
-                LblPorcentaje.Text = VolumenControl.Volume.ToString()+"%";
-                TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
+                //LblPorcentaje.Text = VolumenControl.Volume.ToString()+"%";
+                TrbVolumen.Value = VolumenControl.Volume;
             }
             catch (FileNotFoundException)
             {
@@ -189,7 +190,7 @@ namespace ExpositorDeImagenes
             }
             catch (NullReferenceException)
             {
-                LblPorcentaje.Text = "0%";
+                TrbVolumen.Value = 0;
                 MessageBox.Show("Archivo de musica no encontrado");
                 Estado = false;
             }
@@ -202,7 +203,6 @@ namespace ExpositorDeImagenes
                 SoundPlayer.Dispose();
                 Estado = false;
                 TrbVolumen.Value = 0;
-                LblPorcentaje.Text = "0%";
             }
             catch (NullReferenceException)
             { }
@@ -245,7 +245,7 @@ namespace ExpositorDeImagenes
             }
             catch (NullReferenceException)
             { }
-            LblPorcentaje.Text = TrbVolumen.Value.ToString();
+            LblPorcentaje.Text = TrbVolumen.Value.ToString() + "%";
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
@@ -257,13 +257,14 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                TrbVolumen.Text = VolumenControl.Volume.ToString();
+                LblPorcentaje.Text = VolumenControl.Volume.ToString();
             }
+            catch (NullReferenceException) { MessageBox.Show("Dispositivo de reprodución no encontrado o no instalado"); }
             catch (Exception ex)
             {
-                if (ex is NullReferenceException)
+                if (ex is ArgumentOutOfRangeException || ex is IndexOutOfRangeException)
                 {
-
+                    LblPorcentaje.Text = "0%";
                 }
             }
         }
