@@ -17,7 +17,7 @@ namespace ExpositorDeImagenes
         private ImageList ListaImagenes;
         private Random Rand = new Random();
         public int N;
-        private bool Estado = false, NoRepetir = true;
+        private bool Estado = false, NoRepetir = true; //nos permite revisar si se debe repetir la musica y si esta reproduciendo o no
         private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
 
@@ -100,7 +100,7 @@ namespace ExpositorDeImagenes
         {
             for (int i = 0; i < ListaRevision.Count; i++)
             {
-                CklLista.Items.Add("imagen " + (i + 1), CheckState.Unchecked);
+                CklLista.Items.Add(Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg")[i].Split('\\')[1] + (i + 1), CheckState.Unchecked);
             }
         }
 
