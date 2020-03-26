@@ -57,9 +57,9 @@
             // 
             this.BtnMostrarImagen.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnMostrarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BtnMostrarImagen.Location = new System.Drawing.Point(394, 13);
+            this.BtnMostrarImagen.Location = new System.Drawing.Point(394, 15);
             this.BtnMostrarImagen.Name = "BtnMostrarImagen";
-            this.BtnMostrarImagen.Size = new System.Drawing.Size(68, 36);
+            this.BtnMostrarImagen.Size = new System.Drawing.Size(68, 34);
             this.BtnMostrarImagen.TabIndex = 1;
             this.BtnMostrarImagen.Text = "Mostrar imagen";
             this.BtnMostrarImagen.UseVisualStyleBackColor = false;
@@ -71,7 +71,7 @@
             this.ChkRepetir.Checked = true;
             this.ChkRepetir.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChkRepetir.ForeColor = System.Drawing.Color.White;
-            this.ChkRepetir.Location = new System.Drawing.Point(468, 24);
+            this.ChkRepetir.Location = new System.Drawing.Point(478, 24);
             this.ChkRepetir.Name = "ChkRepetir";
             this.ChkRepetir.Size = new System.Drawing.Size(77, 17);
             this.ChkRepetir.TabIndex = 2;
@@ -84,9 +84,9 @@
             this.BtnMusica.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnMusica.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnMusica.Image = ((System.Drawing.Image)(resources.GetObject("BtnMusica.Image")));
-            this.BtnMusica.Location = new System.Drawing.Point(394, 64);
+            this.BtnMusica.Location = new System.Drawing.Point(394, 66);
             this.BtnMusica.Name = "BtnMusica";
-            this.BtnMusica.Size = new System.Drawing.Size(68, 38);
+            this.BtnMusica.Size = new System.Drawing.Size(68, 36);
             this.BtnMusica.TabIndex = 3;
             this.BtnMusica.UseVisualStyleBackColor = false;
             this.BtnMusica.Click += new System.EventHandler(this.BtnMusica_Click);
@@ -96,9 +96,9 @@
             this.BtnActualizar.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("BtnActualizar.Image")));
-            this.BtnActualizar.Location = new System.Drawing.Point(477, 64);
+            this.BtnActualizar.Location = new System.Drawing.Point(477, 66);
             this.BtnActualizar.Name = "BtnActualizar";
-            this.BtnActualizar.Size = new System.Drawing.Size(68, 38);
+            this.BtnActualizar.Size = new System.Drawing.Size(68, 36);
             this.BtnActualizar.TabIndex = 4;
             this.BtnActualizar.UseVisualStyleBackColor = false;
             this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
@@ -117,11 +117,13 @@
             // 
             // CklLista
             // 
-            this.CklLista.Enabled = false;
             this.CklLista.FormattingEnabled = true;
-            this.CklLista.Location = new System.Drawing.Point(394, 121);
+            this.CklLista.HorizontalScrollbar = true;
+            this.CklLista.Location = new System.Drawing.Point(377, 121);
             this.CklLista.Name = "CklLista";
-            this.CklLista.Size = new System.Drawing.Size(151, 214);
+            this.CklLista.ScrollAlwaysVisible = true;
+            this.CklLista.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.CklLista.Size = new System.Drawing.Size(178, 214);
             this.CklLista.TabIndex = 5;
             // 
             // LblPorcentaje

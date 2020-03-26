@@ -20,7 +20,7 @@ namespace ExpositorDeImagenes
         private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
 
-        public FrmExpositor()
+        public FrmExpositor()//habilitar TrbVolumen cuando se detecte el archivo y el volumen
         {
             InitializeComponent();
             Iniciar();
@@ -41,6 +41,7 @@ namespace ExpositorDeImagenes
                 ConvertiraWav(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString()));
                 SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
                 VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
+                TrbVolumen.Enabled = true;
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
             }
             catch (NullReferenceException) { MessageBox.Show("Dispositivo de reprodución no encontrado o no instalado"); }
@@ -164,7 +165,7 @@ namespace ExpositorDeImagenes
 
         }
         private void BtnMusica_Click(object sender, EventArgs e)
-        {
+        {//añadir un buscador
             if (Estado == false)
             {
                 PonerMusica();
@@ -180,7 +181,6 @@ namespace ExpositorDeImagenes
             {
                 Estado = true;
                 SoundPlayer.PlayLooping();
-                //LblPorcentaje.Text = VolumenControl.Volume.ToString()+"%";
                 TrbVolumen.Value = VolumenControl.Volume;
             }
             catch (Exception ex)
