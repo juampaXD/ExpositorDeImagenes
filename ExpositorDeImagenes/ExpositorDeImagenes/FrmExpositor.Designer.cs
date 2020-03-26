@@ -37,6 +37,7 @@
             this.TrbVolumen = new System.Windows.Forms.TrackBar();
             this.CklLista = new System.Windows.Forms.CheckedListBox();
             this.LblPorcentaje = new System.Windows.Forms.Label();
+            this.ChkMarcadoManual = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +58,7 @@
             // 
             this.BtnMostrarImagen.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnMostrarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BtnMostrarImagen.Location = new System.Drawing.Point(394, 15);
+            this.BtnMostrarImagen.Location = new System.Drawing.Point(377, 17);
             this.BtnMostrarImagen.Name = "BtnMostrarImagen";
             this.BtnMostrarImagen.Size = new System.Drawing.Size(68, 34);
             this.BtnMostrarImagen.TabIndex = 1;
@@ -71,7 +72,7 @@
             this.ChkRepetir.Checked = true;
             this.ChkRepetir.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChkRepetir.ForeColor = System.Drawing.Color.White;
-            this.ChkRepetir.Location = new System.Drawing.Point(478, 24);
+            this.ChkRepetir.Location = new System.Drawing.Point(377, 67);
             this.ChkRepetir.Name = "ChkRepetir";
             this.ChkRepetir.Size = new System.Drawing.Size(77, 17);
             this.ChkRepetir.TabIndex = 2;
@@ -84,7 +85,7 @@
             this.BtnMusica.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnMusica.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnMusica.Image = ((System.Drawing.Image)(resources.GetObject("BtnMusica.Image")));
-            this.BtnMusica.Location = new System.Drawing.Point(394, 66);
+            this.BtnMusica.Location = new System.Drawing.Point(487, 68);
             this.BtnMusica.Name = "BtnMusica";
             this.BtnMusica.Size = new System.Drawing.Size(68, 36);
             this.BtnMusica.TabIndex = 3;
@@ -96,7 +97,7 @@
             this.BtnActualizar.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("BtnActualizar.Image")));
-            this.BtnActualizar.Location = new System.Drawing.Point(477, 66);
+            this.BtnActualizar.Location = new System.Drawing.Point(487, 17);
             this.BtnActualizar.Name = "BtnActualizar";
             this.BtnActualizar.Size = new System.Drawing.Size(68, 36);
             this.BtnActualizar.TabIndex = 4;
@@ -137,12 +138,27 @@
             this.LblPorcentaje.TabIndex = 6;
             this.LblPorcentaje.Text = "100%";
             // 
+            // ChkMarcadoManual
+            // 
+            this.ChkMarcadoManual.AutoSize = true;
+            this.ChkMarcadoManual.BackColor = System.Drawing.Color.Black;
+            this.ChkMarcadoManual.ForeColor = System.Drawing.Color.White;
+            this.ChkMarcadoManual.Location = new System.Drawing.Point(377, 87);
+            this.ChkMarcadoManual.Name = "ChkMarcadoManual";
+            this.ChkMarcadoManual.Size = new System.Drawing.Size(105, 17);
+            this.ChkMarcadoManual.TabIndex = 7;
+            this.ChkMarcadoManual.Tag = "ss";
+            this.ChkMarcadoManual.Text = "Marcado manual";
+            this.ChkMarcadoManual.UseVisualStyleBackColor = false;
+            this.ChkMarcadoManual.CheckedChanged += new System.EventHandler(this.ChkMarcadoManual_CheckedChanged);
+            // 
             // FrmExpositor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(639, 348);
+            this.Controls.Add(this.ChkMarcadoManual);
             this.Controls.Add(this.LblPorcentaje);
             this.Controls.Add(this.CklLista);
             this.Controls.Add(this.TrbVolumen);
@@ -151,6 +167,7 @@
             this.Controls.Add(this.ChkRepetir);
             this.Controls.Add(this.BtnMostrarImagen);
             this.Controls.Add(this.PicExpositor);
+            this.MaximizeBox = false;
             this.Name = "FrmExpositor";
             this.ShowIcon = false;
             this.Text = "Expositor";
@@ -171,6 +188,7 @@
         private System.Windows.Forms.TrackBar TrbVolumen;
         private System.Windows.Forms.CheckedListBox CklLista;
         private System.Windows.Forms.Label LblPorcentaje;
+        private System.Windows.Forms.CheckBox ChkMarcadoManual;
     }
 }
 

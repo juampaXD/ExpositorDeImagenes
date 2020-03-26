@@ -6,6 +6,7 @@ using System.Media;
 using AudioSwitcher.AudioApi.CoreAudio; //Nuget para el control del volumen
 using System.IO;
 using NAudio.Wave;
+using System.Linq;
 
 namespace ExpositorDeImagenes
 
@@ -68,11 +69,11 @@ namespace ExpositorDeImagenes
                 ColorDepth = ColorDepth.Depth32Bit,
                 ImageSize = new Size(250, 250)
             };
-            string[] path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg");
+            List <string> path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").ToList<string>();
             int i = 0;
             foreach (var item in path)
             {
-                ListaImagenes.Images.Add(i.ToString(), Image.FromFile(path[i]));
+                ListaImagenes.Images.Add(i.ToString(), Image.FromFile(item));
                 i++;
             }
         }
@@ -185,7 +186,7 @@ namespace ExpositorDeImagenes
             }
             catch (Exception ex)
             {
-                if (ex is NullReferenceException  || ex is FileNotFoundException)
+                if (ex is NullReferenceException || ex is FileNotFoundException)
                 {
                     TrbVolumen.Value = 0;
                     LblPorcentaje.Text = TrbVolumen.Value + "%";
@@ -251,6 +252,16 @@ namespace ExpositorDeImagenes
             }
 
             LblPorcentaje.Text = TrbVolumen.Value + "%";
+        }
+
+        private void ChkMarcadoManual_CheckedChanged(object sender, EventArgs e)
+        {//permite establecer si se puede chequear de forma manual
+            if (CklLista.SelectionMode is SelectionMode.One)
+            {
+                CklLista.SelectionMode = SelectionMode.None;
+            }
+            else
+                CklLista.SelectionMode = SelectionMode.One;
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
