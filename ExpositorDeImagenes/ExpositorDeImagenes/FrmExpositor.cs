@@ -15,7 +15,6 @@ namespace ExpositorDeImagenes
     {
         private List<bool> ListaRevision = new List<bool>();
         private ImageList ListaImagenes;
-        private Random Rand = new Random();
         public int N;
         private bool Estado = false, NoRepetir = true; //nos permite revisar si se debe repetir la musica y si esta reproduciendo o no
         private SoundPlayer SoundPlayer;
@@ -116,16 +115,16 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                if (ListaRevision.Count(n => n.Equals(true))+1 >= ListaRevision.Count)
+                Random Rand = new Random();
+                if (ListaRevision.Count(n => n.Equals(true)) + 1 >= ListaRevision.Count)
                 {
+                    for (int i = 0; i < CklLista.Items.Count; i++)
+                    {
+                        CklLista.SetItemChecked(i, false);//reinicia los checks
+                    }
                     MessageBox.Show($"Todas las imagenes se mostraron {ListaRevision.Count}");
                     GenerarLista();//en este limpia la lista de revision
                     PicExpositor.BackgroundImage = null;
-                    //reinicia los checks
-                    for (int i = 0; i < CklLista.Items.Count; i++)
-                    {
-                        CklLista.SetItemChecked(i, false);
-                    }
                     return;
                 }
                 if (NoRepetir)
