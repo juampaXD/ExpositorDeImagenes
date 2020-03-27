@@ -15,7 +15,6 @@ namespace ExpositorDeImagenes
     {
         private List<bool> ListaRevision = new List<bool>();
         private ImageList ListaImagenes;
-        public int N;
         private bool Estado = false, NoRepetir = true; //nos permite revisar si se debe repetir la musica y si esta reproduciendo o no
         private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
@@ -115,14 +114,15 @@ namespace ExpositorDeImagenes
         {
             try
             {
+                int N=x;
                 Random Rand = new Random();
-                if (ListaRevision.Count(n => n.Equals(true)) >= ListaRevision.Count)
+                if (ListaRevision.Count(n => n.Equals(true)) >= N-1)
                 {
                     for (int i = 0; i < CklLista.Items.Count; i++)
                     {
                         CklLista.SetItemChecked(i, false);//reinicia los checks
                     }
-                    MessageBox.Show($"Todas las imagenes se mostraron {ListaRevision.Count}");
+                    MessageBox.Show($"Todas las imagenes se mostraron {N}");
                     GenerarLista();//en este limpia la lista de revision
                     PicExpositor.BackgroundImage = null;
                     return;
@@ -156,7 +156,7 @@ namespace ExpositorDeImagenes
             {
                 PicExpositor.BackgroundImage = ListaImagenes.Images[x];
                 CklLista.SetItemChecked(x, true);
-                ListaRevision[N] = true;
+                ListaRevision[x] = true;
             }
             catch (ArgumentOutOfRangeException)
             { MessageBox.Show("imagenes no encontradas"); }
@@ -273,6 +273,46 @@ namespace ExpositorDeImagenes
             catch (NullReferenceException)
             {
             }
+        }
+
+        private void BtnMostrarImagen_MouseHover(object sender, EventArgs e)
+        {
+            TipExpositor.SetToolTip(BtnMostrarImagen,"Muestra las imagenes de la lista");
+        }
+
+        private void BtnActualizar_MouseHover(object sender, EventArgs e)
+        {
+            TipExpositor.SetToolTip(BtnActualizar, "Actualiza la lista del expositor");
+        }
+
+        private void BtnMusica_MouseHover(object sender, EventArgs e)
+        {
+            TipExpositor.SetToolTip(BtnMusica, "añade una canción en formato mp3 a la carpeta MyMusic y podrás escuchar música");
+        }
+
+        private void ChkRepetir_MouseHover(object sender, EventArgs e)
+        {
+            TipExpositor.SetToolTip(ChkRepetir, "Indica si se pueden repetir imágenes o no");
+        }
+
+        private void ChkMarcadoManual_MouseHover(object sender, EventArgs e)
+        {
+            TipExpositor.SetToolTip(ChkMarcadoManual, "Indica si deseas marcar alguna imagen como vista  o no vista");
+        }
+
+        private void TrbVolumen_MouseHover(object sender, EventArgs e)
+        {
+            TipExpositor.SetToolTip(TrbVolumen, "sube y baja el Volumen para la música");
+        }
+
+        private void CklLista_MouseHover(object sender, EventArgs e)
+        {
+            TipExpositor.SetToolTip(CklLista, "Lista de imágenes a mostrar");
+        }
+
+        private void PicExpositor_MouseHover(object sender, EventArgs e)
+        {
+            TipExpositor.SetToolTip(PicExpositor, "Presentación de las imagenes");
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)

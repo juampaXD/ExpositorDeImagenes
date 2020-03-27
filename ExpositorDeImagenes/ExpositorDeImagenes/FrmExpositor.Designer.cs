@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmExpositor));
             this.PicExpositor = new System.Windows.Forms.PictureBox();
             this.BtnMostrarImagen = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@
             this.CklLista = new System.Windows.Forms.CheckedListBox();
             this.LblPorcentaje = new System.Windows.Forms.Label();
             this.ChkMarcadoManual = new System.Windows.Forms.CheckBox();
+            this.TipExpositor = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).BeginInit();
             this.SuspendLayout();
@@ -53,6 +55,7 @@
             this.PicExpositor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PicExpositor.TabIndex = 0;
             this.PicExpositor.TabStop = false;
+            this.PicExpositor.MouseHover += new System.EventHandler(this.PicExpositor_MouseHover);
             // 
             // BtnMostrarImagen
             // 
@@ -65,6 +68,7 @@
             this.BtnMostrarImagen.Text = "Mostrar imagen";
             this.BtnMostrarImagen.UseVisualStyleBackColor = false;
             this.BtnMostrarImagen.Click += new System.EventHandler(this.BtnMostrarImagen_Click);
+            this.BtnMostrarImagen.MouseHover += new System.EventHandler(this.BtnMostrarImagen_MouseHover);
             // 
             // ChkRepetir
             // 
@@ -79,6 +83,7 @@
             this.ChkRepetir.Text = "No Repetir";
             this.ChkRepetir.UseVisualStyleBackColor = true;
             this.ChkRepetir.CheckedChanged += new System.EventHandler(this.ChkRepetir_CheckedChanged);
+            this.ChkRepetir.MouseHover += new System.EventHandler(this.ChkRepetir_MouseHover);
             // 
             // BtnMusica
             // 
@@ -91,6 +96,7 @@
             this.BtnMusica.TabIndex = 3;
             this.BtnMusica.UseVisualStyleBackColor = false;
             this.BtnMusica.Click += new System.EventHandler(this.BtnMusica_Click);
+            this.BtnMusica.MouseHover += new System.EventHandler(this.BtnMusica_MouseHover);
             // 
             // BtnActualizar
             // 
@@ -103,18 +109,22 @@
             this.BtnActualizar.TabIndex = 4;
             this.BtnActualizar.UseVisualStyleBackColor = false;
             this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
+            this.BtnActualizar.MouseHover += new System.EventHandler(this.BtnActualizar_MouseHover);
             // 
             // TrbVolumen
             // 
+            this.TrbVolumen.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.TrbVolumen.Enabled = false;
-            this.TrbVolumen.Location = new System.Drawing.Point(573, 44);
+            this.TrbVolumen.Location = new System.Drawing.Point(578, 44);
             this.TrbVolumen.Maximum = 100;
             this.TrbVolumen.Name = "TrbVolumen";
             this.TrbVolumen.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.TrbVolumen.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TrbVolumen.Size = new System.Drawing.Size(45, 291);
             this.TrbVolumen.TabIndex = 5;
-            this.TrbVolumen.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.TrbVolumen.Tag = "";
             this.TrbVolumen.Scroll += new System.EventHandler(this.TrbVolumen_Scroll);
+            this.TrbVolumen.MouseHover += new System.EventHandler(this.TrbVolumen_MouseHover);
             // 
             // CklLista
             // 
@@ -127,6 +137,7 @@
             this.CklLista.Size = new System.Drawing.Size(178, 214);
             this.CklLista.TabIndex = 5;
             this.CklLista.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CklLista_ItemCheck);
+            this.CklLista.MouseHover += new System.EventHandler(this.CklLista_MouseHover);
             // 
             // LblPorcentaje
             // 
@@ -152,6 +163,13 @@
             this.ChkMarcadoManual.Text = "Marcado manual";
             this.ChkMarcadoManual.UseVisualStyleBackColor = false;
             this.ChkMarcadoManual.CheckedChanged += new System.EventHandler(this.ChkMarcadoManual_CheckedChanged);
+            this.ChkMarcadoManual.MouseHover += new System.EventHandler(this.ChkMarcadoManual_MouseHover);
+            // 
+            // TipExpositor
+            // 
+            this.TipExpositor.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.TipExpositor.ToolTipTitle = "Guía";
+            this.TipExpositor.UseAnimation = false;
             // 
             // FrmExpositor
             // 
@@ -190,6 +208,7 @@
         private System.Windows.Forms.CheckedListBox CklLista;
         private System.Windows.Forms.Label LblPorcentaje;
         private System.Windows.Forms.CheckBox ChkMarcadoManual;
+        private System.Windows.Forms.ToolTip TipExpositor;
     }
 }
 
