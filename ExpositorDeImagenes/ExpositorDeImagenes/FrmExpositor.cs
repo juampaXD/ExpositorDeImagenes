@@ -117,6 +117,26 @@ namespace ExpositorDeImagenes
         {
             try
             {
+                int contador = 0;
+                //int s= ListaRevision.Count(n => n.Equals(true));
+                foreach (var item in ListaRevision)
+                {
+                    if (item == true)
+                    {
+                        contador++;
+                    }
+                }
+                if (contador == ListaRevision.Count)
+                {
+                    MessageBox.Show($"Todas las imagenes se mostraron {ListaRevision.Count}");//interpolación
+                    GenerarLista();//en este limpia la lista de revision
+                    PicExpositor.BackgroundImage = null;
+                    //reinicia los checks
+                    for (int i = 0; i < CklLista.Items.Count; i++)
+                    {
+                        CklLista.SetItemChecked(i, false);
+                    }
+                }
                 if (NoRepetir)
                 {
                     do
@@ -139,31 +159,12 @@ namespace ExpositorDeImagenes
 
         private void MostrarImagen(int x)
         {
-            int contador = 0;
+            
             try
             {
                 PicExpositor.BackgroundImage = ListaImagenes.Images[x];
                 CklLista.SetItemChecked(x, true);
                 ListaRevision[N] = true;
-                foreach (var item in ListaRevision)
-                {
-                    if (item == true)
-                    {
-                        contador++;
-                    }
-                }
-                if (contador == ListaRevision.Count)
-                {
-                    MessageBox.Show($"Todas las imagenes se mostraron ({ListaRevision.Count})");//interpolación
-                    GenerarLista();//en este limpia la lista de revision
-                    PicExpositor.BackgroundImage = null;
-                    //reinicia los checks
-                    for (int i = 0; i < CklLista.Items.Count; i++)
-                    {
-                        CklLista.SetItemChecked(i, false);
-                    }
-                }
-
             }
             catch (ArgumentOutOfRangeException)
             { MessageBox.Show("imagenes no encontradas"); }
