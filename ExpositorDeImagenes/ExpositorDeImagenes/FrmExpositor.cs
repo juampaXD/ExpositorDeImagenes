@@ -116,7 +116,7 @@ namespace ExpositorDeImagenes
             try
             {
                 Random Rand = new Random();
-                if (ListaRevision.Count(n => n.Equals(true)) + 1 >= ListaRevision.Count)
+                if (ListaRevision.Count(n => n.Equals(true)) >= ListaRevision.Count)
                 {
                     for (int i = 0; i < CklLista.Items.Count; i++)
                     {
