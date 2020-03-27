@@ -110,25 +110,15 @@ namespace ExpositorDeImagenes
             {
                 BtnMostrarImagen.Text = "Cambiar imagen";
             }
-            EscogerNumero(CklLista.Items.Count); //elige un numero
-            MostrarImagen(N);
+            EscogerNumero(CklLista.Items.Count);
         }
         public void EscogerNumero(int x)
         {
             try
             {
-                int contador = 0;
-                //int s= ListaRevision.Count(n => n.Equals(true));
-                foreach (var item in ListaRevision)
+                if (ListaRevision.Count(n => n.Equals(true))+1 >= ListaRevision.Count)
                 {
-                    if (item == true)
-                    {
-                        contador++;
-                    }
-                }
-                if (contador == ListaRevision.Count)
-                {
-                    MessageBox.Show($"Todas las imagenes se mostraron {ListaRevision.Count}");//interpolación
+                    MessageBox.Show($"Todas las imagenes se mostraron {ListaRevision.Count}");
                     GenerarLista();//en este limpia la lista de revision
                     PicExpositor.BackgroundImage = null;
                     //reinicia los checks
@@ -136,20 +126,24 @@ namespace ExpositorDeImagenes
                     {
                         CklLista.SetItemChecked(i, false);
                     }
+                    return;
                 }
                 if (NoRepetir)
                 {
                     do
                     {
                         N = Rand.Next(0, x);
-                        if (ListaRevision[N].Equals(false)) {
+                        if (ListaRevision[N].Equals(false))
+                        {
                             break;
                         }
                     } while (true);
                 }
-                else {
+                else
+                {
                     N = Rand.Next(0, x);
                 }
+                MostrarImagen(N);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -159,7 +153,6 @@ namespace ExpositorDeImagenes
 
         private void MostrarImagen(int x)
         {
-            
             try
             {
                 PicExpositor.BackgroundImage = ListaImagenes.Images[x];
@@ -168,7 +161,6 @@ namespace ExpositorDeImagenes
             }
             catch (ArgumentOutOfRangeException)
             { MessageBox.Show("imagenes no encontradas"); }
-
         }
         private void BtnMusica_Click(object sender, EventArgs e)
         {//añadir un buscador
