@@ -137,13 +137,13 @@ namespace ExpositorDeImagenes
             }
         }
 
-        private void MostrarImagen(int N)
+        private void MostrarImagen(int x)
         {
             int contador = 0;
             try
             {
-                PicExpositor.BackgroundImage = ListaImagenes.Images[N];
-                CklLista.SetItemChecked(N, true);
+                PicExpositor.BackgroundImage = ListaImagenes.Images[x];
+                CklLista.SetItemChecked(x, true);
                 ListaRevision[N] = true;
                 foreach (var item in ListaRevision)
                 {
