@@ -126,6 +126,7 @@
             this.CklLista.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.CklLista.Size = new System.Drawing.Size(178, 214);
             this.CklLista.TabIndex = 5;
+            this.CklLista.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CklLista_ItemCheck);
             // 
             // LblPorcentaje
             // 

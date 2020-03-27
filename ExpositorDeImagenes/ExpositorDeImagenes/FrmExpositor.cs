@@ -69,7 +69,7 @@ namespace ExpositorDeImagenes
                 ColorDepth = ColorDepth.Depth32Bit,
                 ImageSize = new Size(250, 250)
             };
-            List <string> path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").ToList<string>();
+            List<string> path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").ToList<string>();
             int i = 0;
             foreach (var item in path)
             {
@@ -110,21 +110,25 @@ namespace ExpositorDeImagenes
             {
                 BtnMostrarImagen.Text = "Cambiar imagen";
             }
-            EscogerNumero(ListaRevision, CklLista.Items.Count, NoRepetir); //elige un numero
+            EscogerNumero(CklLista.Items.Count); //elige un numero
             MostrarImagen(N);
         }
-        public void EscogerNumero(List<bool> l, int x, bool r)
+        public void EscogerNumero(int x)
         {
             try
             {
-                N = Rand.Next(0, x);
-                /**
-                 * l=> la lista de booleanos
-                 * x=> numero maximo al azar para escoger el número
-                 * r=> true si para no repetir**/
-                if (l[N] == true && r)
+                if (NoRepetir)
                 {
-                    EscogerNumero(l, x, r);
+                    do
+                    {
+                        N = Rand.Next(0, x);
+                        if (ListaRevision[N].Equals(false)) {
+                            break;
+                        }
+                    } while (true);
+                }
+                else {
+                    N = Rand.Next(0, x);
                 }
             }
             catch (ArgumentOutOfRangeException)
@@ -262,6 +266,21 @@ namespace ExpositorDeImagenes
             }
             else
                 CklLista.SelectionMode = SelectionMode.One;
+        }
+
+        private void CklLista_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            try
+            {
+                if (CklLista.SelectedItem.Equals(true))
+
+                    ListaRevision[CklLista.SelectedIndex] = false;
+                else
+                    ListaRevision[CklLista.SelectedIndex] = true;
+            }
+            catch (NullReferenceException)
+            {
+            }
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
