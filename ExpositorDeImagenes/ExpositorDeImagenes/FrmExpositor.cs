@@ -260,21 +260,6 @@ namespace ExpositorDeImagenes
                 CklLista.SelectionMode = SelectionMode.One;
         }
 
-        private void CklLista_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            try
-            {
-                if (CklLista.SelectedItem.Equals(true))
-
-                    ListaRevision[CklLista.SelectedIndex] = false;
-                else
-                    ListaRevision[CklLista.SelectedIndex] = true;
-            }
-            catch (NullReferenceException)
-            {
-            }
-        }
-
         private void BtnMostrarImagen_MouseHover(object sender, EventArgs e)
         {
             TipExpositor.SetToolTip(BtnMostrarImagen,"Muestra las imagenes de la lista");
@@ -305,11 +290,6 @@ namespace ExpositorDeImagenes
             TipExpositor.SetToolTip(TrbVolumen, "sube y baja el Volumen para la música");
         }
 
-        private void CklLista_MouseHover(object sender, EventArgs e)
-        {
-            TipExpositor.SetToolTip(CklLista, "Lista de imágenes a mostrar");
-        }
-
         private void PicExpositor_MouseHover(object sender, EventArgs e)
         {
             TipExpositor.SetToolTip(PicExpositor, "Presentación de las imagenes");
@@ -318,6 +298,14 @@ namespace ExpositorDeImagenes
         private void LblPorcentaje_MouseHover(object sender, EventArgs e)
         {
             TipExpositor.SetToolTip(LblPorcentaje, "Volumen para la música");
+        }
+
+        private void CklLista_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(true))
+                CklLista.SetItemChecked(CklLista.SelectedIndex, false);
+            else if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(false))
+                CklLista.SetItemChecked(CklLista.SelectedIndex, true);//pasa solo aqui verifica
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)

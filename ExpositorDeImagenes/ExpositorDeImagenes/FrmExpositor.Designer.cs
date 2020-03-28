@@ -93,7 +93,7 @@
             this.BtnMusica.Location = new System.Drawing.Point(487, 68);
             this.BtnMusica.Name = "BtnMusica";
             this.BtnMusica.Size = new System.Drawing.Size(68, 36);
-            this.BtnMusica.TabIndex = 3;
+            this.BtnMusica.TabIndex = 6;
             this.BtnMusica.UseVisualStyleBackColor = false;
             this.BtnMusica.Click += new System.EventHandler(this.BtnMusica_Click);
             this.BtnMusica.MouseHover += new System.EventHandler(this.BtnMusica_MouseHover);
@@ -106,7 +106,7 @@
             this.BtnActualizar.Location = new System.Drawing.Point(487, 17);
             this.BtnActualizar.Name = "BtnActualizar";
             this.BtnActualizar.Size = new System.Drawing.Size(68, 36);
-            this.BtnActualizar.TabIndex = 4;
+            this.BtnActualizar.TabIndex = 5;
             this.BtnActualizar.UseVisualStyleBackColor = false;
             this.BtnActualizar.Click += new System.EventHandler(this.BtnActualizar_Click);
             this.BtnActualizar.MouseHover += new System.EventHandler(this.BtnActualizar_MouseHover);
@@ -121,7 +121,7 @@
             this.TrbVolumen.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.TrbVolumen.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.TrbVolumen.Size = new System.Drawing.Size(45, 291);
-            this.TrbVolumen.TabIndex = 5;
+            this.TrbVolumen.TabIndex = 7;
             this.TrbVolumen.Tag = "";
             this.TrbVolumen.Scroll += new System.EventHandler(this.TrbVolumen_Scroll);
             this.TrbVolumen.MouseHover += new System.EventHandler(this.TrbVolumen_MouseHover);
@@ -135,9 +135,8 @@
             this.CklLista.ScrollAlwaysVisible = true;
             this.CklLista.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.CklLista.Size = new System.Drawing.Size(178, 214);
-            this.CklLista.TabIndex = 5;
-            this.CklLista.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CklLista_ItemCheck);
-            this.CklLista.MouseHover += new System.EventHandler(this.CklLista_MouseHover);
+            this.CklLista.TabIndex = 4;
+            this.CklLista.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CklLista_KeyDown);
             // 
             // LblPorcentaje
             // 
@@ -147,7 +146,7 @@
             this.LblPorcentaje.Location = new System.Drawing.Point(565, 17);
             this.LblPorcentaje.Name = "LblPorcentaje";
             this.LblPorcentaje.Size = new System.Drawing.Size(59, 24);
-            this.LblPorcentaje.TabIndex = 6;
+            this.LblPorcentaje.TabIndex = 8;
             this.LblPorcentaje.Text = "100%";
             this.LblPorcentaje.MouseHover += new System.EventHandler(this.LblPorcentaje_MouseHover);
             // 
@@ -159,7 +158,7 @@
             this.ChkMarcadoManual.Location = new System.Drawing.Point(377, 87);
             this.ChkMarcadoManual.Name = "ChkMarcadoManual";
             this.ChkMarcadoManual.Size = new System.Drawing.Size(105, 17);
-            this.ChkMarcadoManual.TabIndex = 7;
+            this.ChkMarcadoManual.TabIndex = 3;
             this.ChkMarcadoManual.Tag = "ss";
             this.ChkMarcadoManual.Text = "Marcado manual";
             this.ChkMarcadoManual.UseVisualStyleBackColor = false;
