@@ -315,6 +315,11 @@ namespace ExpositorDeImagenes
             TipExpositor.SetToolTip(PicExpositor, "Presentación de las imagenes");
         }
 
+        private void LblPorcentaje_MouseHover(object sender, EventArgs e)
+        {
+            TipExpositor.SetToolTip(LblPorcentaje, "Volumen para la música");
+        }
+
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
         {
             NoRepetir = (ChkRepetir.Checked.Equals(true)) ? true : false;

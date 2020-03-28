@@ -149,6 +149,7 @@
             this.LblPorcentaje.Size = new System.Drawing.Size(59, 24);
             this.LblPorcentaje.TabIndex = 6;
             this.LblPorcentaje.Text = "100%";
+            this.LblPorcentaje.MouseHover += new System.EventHandler(this.LblPorcentaje_MouseHover);
             // 
             // ChkMarcadoManual
             // 
