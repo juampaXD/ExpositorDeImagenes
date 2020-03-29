@@ -186,9 +186,9 @@
             this.Controls.Add(this.ChkRepetir);
             this.Controls.Add(this.BtnMostrarImagen);
             this.Controls.Add(this.PicExpositor);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FrmExpositor";
-            this.ShowIcon = false;
             this.Text = "Expositor";
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).EndInit();
