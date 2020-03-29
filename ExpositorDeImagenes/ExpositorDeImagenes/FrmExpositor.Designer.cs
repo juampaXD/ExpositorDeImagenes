@@ -83,6 +83,7 @@
             this.ChkRepetir.Text = "No Repetir";
             this.ChkRepetir.UseVisualStyleBackColor = true;
             this.ChkRepetir.CheckedChanged += new System.EventHandler(this.ChkRepetir_CheckedChanged);
+            this.ChkRepetir.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChkRepetir_KeyDown);
             this.ChkRepetir.MouseHover += new System.EventHandler(this.ChkRepetir_MouseHover);
             // 
             // BtnMusica
@@ -163,6 +164,7 @@
             this.ChkMarcadoManual.Text = "Marcado manual";
             this.ChkMarcadoManual.UseVisualStyleBackColor = false;
             this.ChkMarcadoManual.CheckedChanged += new System.EventHandler(this.ChkMarcadoManual_CheckedChanged);
+            this.ChkMarcadoManual.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChkMarcadoManual_KeyDown);
             this.ChkMarcadoManual.MouseHover += new System.EventHandler(this.ChkMarcadoManual_MouseHover);
             // 
             // TipExpositor
@@ -188,6 +190,8 @@
             this.Controls.Add(this.PicExpositor);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(655, 387);
+            this.MinimumSize = new System.Drawing.Size(655, 387);
             this.Name = "FrmExpositor";
             this.Text = "Expositor";
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).EndInit();

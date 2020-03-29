@@ -324,6 +324,22 @@ namespace ExpositorDeImagenes
             catch (ArgumentOutOfRangeException){}
         }
 
+        private void ChkRepetir_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue.Equals(13) && ChkRepetir.Checked.Equals(false))
+                ChkRepetir.Checked = true;
+            else
+                ChkRepetir.Checked = false;
+        }
+
+        private void ChkMarcadoManual_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue.Equals(13) && ChkMarcadoManual.Checked.Equals(false))
+                ChkMarcadoManual.Checked = true;
+            else
+                ChkMarcadoManual.Checked = false;
+        }
+
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
         {
             NoRepetir = (ChkRepetir.Checked.Equals(true)) ? true : false;
