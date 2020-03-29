@@ -78,6 +78,11 @@ namespace ExpositorDeImagenes
 
         private void GenerarLista()
         {//rellena la lista de comprobación
+            if (Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length != ListaRevision.Count)
+            {
+                CklLista.Items.Clear();
+                ListaRevision.Clear();
+            }
             if (CklLista.Items.Count == 0)
             {
                 for (int i = 0; i < Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length; i++)
@@ -303,16 +308,20 @@ namespace ExpositorDeImagenes
 
         private void CklLista_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(true))
+            try
             {
-                CklLista.SetItemChecked(CklLista.SelectedIndex, false);
-                ListaRevision[CklLista.SelectedIndex] = false;
+                if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(true))
+                {
+                    CklLista.SetItemChecked(CklLista.SelectedIndex, false);
+                    ListaRevision[CklLista.SelectedIndex] = false;
+                }
+                else if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(false))
+                {
+                    CklLista.SetItemChecked(CklLista.SelectedIndex, true);
+                    ListaRevision[CklLista.SelectedIndex] = true;
+                }
             }
-            else if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(false))
-            {
-                CklLista.SetItemChecked(CklLista.SelectedIndex, true);
-                ListaRevision[CklLista.SelectedIndex] = true;
-            }
+            catch (ArgumentOutOfRangeException){}
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
