@@ -77,8 +77,8 @@ namespace ExpositorDeImagenes
         }
 
         private void GenerarLista()
-        {
-            if (ListaRevision.Count == 0)
+        {//rellena la lista de comprobación
+            if (CklLista.Items.Count == 0)
             {
                 for (int i = 0; i < Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length; i++)
                 {
@@ -95,7 +95,7 @@ namespace ExpositorDeImagenes
         }
 
         private void RellenarLista()
-        {
+        {//llena la lista
             for (int i = 0; i < ListaRevision.Count; i++)
             {
                 CklLista.Items.Add(Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg")[i].Split('\\')[1] + (i + 1), CheckState.Unchecked);
@@ -114,15 +114,16 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                int N=x;
+                int N = x;
                 Random Rand = new Random();
-                if (ListaRevision.Count(n => n.Equals(true)) >= N-1)
+                if (ListaRevision.Count(n => n.Equals(true)) >= N - 1)
                 {
                     for (int i = 0; i < CklLista.Items.Count; i++)
                     {
                         CklLista.SetItemChecked(i, false);//reinicia los checks
                     }
                     MessageBox.Show($"Todas las imagenes se mostraron {N}");
+                    BtnMostrarImagen.Text = "Mostrar imagen";
                     GenerarLista();//en este limpia la lista de revision
                     PicExpositor.BackgroundImage = null;
                     return;
@@ -220,7 +221,7 @@ namespace ExpositorDeImagenes
         }
         private void Actulizar()
         {
-            PararMusica();//paramos en caso de que este reproduciendo
+            PararMusica();
             ListaRevision.Clear();
             CklLista.Items.Clear();
 
@@ -247,7 +248,7 @@ namespace ExpositorDeImagenes
                 }
             }
 
-            LblPorcentaje.Text = TrbVolumen.Value + "%";
+            LblPorcentaje.Text = TrbVolumen.Value + " %";
         }
 
         private void ChkMarcadoManual_CheckedChanged(object sender, EventArgs e)
@@ -262,7 +263,7 @@ namespace ExpositorDeImagenes
 
         private void BtnMostrarImagen_MouseHover(object sender, EventArgs e)
         {
-            TipExpositor.SetToolTip(BtnMostrarImagen,"Muestra las imagenes de la lista");
+            TipExpositor.SetToolTip(BtnMostrarImagen, "Muestra las imagenes de la lista");
         }
 
         private void BtnActualizar_MouseHover(object sender, EventArgs e)
@@ -303,9 +304,15 @@ namespace ExpositorDeImagenes
         private void CklLista_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(true))
+            {
                 CklLista.SetItemChecked(CklLista.SelectedIndex, false);
+                ListaRevision[CklLista.SelectedIndex] = false;
+            }
             else if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(false))
-                CklLista.SetItemChecked(CklLista.SelectedIndex, true);//pasa solo aqui verifica
+            {
+                CklLista.SetItemChecked(CklLista.SelectedIndex, true);
+                ListaRevision[CklLista.SelectedIndex] = true;
+            }
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
