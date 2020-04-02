@@ -30,6 +30,7 @@ namespace ExpositorDeImagenes
             CargarImagenes();
             GenerarLista();
             RellenarLista();
+            //ConvertiraWav(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "mp3")[0]);
             PrepararAudios();
         }
 
@@ -37,7 +38,6 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                ConvertiraWav(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString()));
                 SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
                 VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
                 TrbVolumen.Enabled = true;
@@ -182,6 +182,21 @@ namespace ExpositorDeImagenes
         {
             try
             {
+                if (!File.Exists(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav"))
+                {
+                    OpenFileDialog file = new OpenFileDialog
+                    {
+                        Filter = "Archivos de música(*.mp3) | *.mp3",
+                        Title = "Archivos mp3"
+                    };
+                    if (file.ShowDialog() == DialogResult.OK)
+                    {
+                        ConvertiraWav(file.FileName);
+                    }
+                    file.Dispose();
+                }
+
+                PrepararAudios();
                 Estado = true;
                 SoundPlayer.PlayLooping();
                 TrbVolumen.Value = VolumenControl.Volume;
@@ -209,15 +224,16 @@ namespace ExpositorDeImagenes
             catch (NullReferenceException)
             { }
         }
-        private void ConvertiraWav(string[] x)
+        private void ConvertiraWav(string x)
         {
-            if (x[0].ToLower().Contains(".mp3"))
+            if (x.ToLower().Contains(".mp3"))
             {
-                Mp3FileReader mp3 = new Mp3FileReader(x[0]);
+                Mp3FileReader mp3 = new Mp3FileReader(x);
                 WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(mp3);
                 WaveFileWriter.CreateWaveFile("Musica.wav", pcm);//crea un archivo wav
                 File.Move(Application.StartupPath.ToString() + @"\Musica.wav", Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
             }
+            else { MessageBox.Show("Extensión invalida"); }
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
@@ -227,6 +243,7 @@ namespace ExpositorDeImagenes
         private void Actulizar()
         {
             PararMusica();
+            File.Delete(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
             ListaRevision.Clear();
             CklLista.Items.Clear();
 
@@ -321,7 +338,7 @@ namespace ExpositorDeImagenes
                     ListaRevision[CklLista.SelectedIndex] = true;
                 }
             }
-            catch (ArgumentOutOfRangeException){}
+            catch (ArgumentOutOfRangeException) { }
         }
 
         private void ChkRepetir_KeyDown(object sender, KeyEventArgs e)
