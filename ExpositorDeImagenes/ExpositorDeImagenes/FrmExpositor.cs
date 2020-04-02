@@ -19,7 +19,7 @@ namespace ExpositorDeImagenes
         private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
 
-        public FrmExpositor()//habilitar TrbVolumen cuando se detecte el archivo y el volumen
+        public FrmExpositor()
         {
             InitializeComponent();
             Iniciar();
@@ -30,7 +30,6 @@ namespace ExpositorDeImagenes
             CargarImagenes();
             GenerarLista();
             RellenarLista();
-            //ConvertiraWav(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "mp3")[0]);
             PrepararAudios();
         }
 
@@ -121,13 +120,13 @@ namespace ExpositorDeImagenes
             {
                 int N = x;
                 Random Rand = new Random();
-                if (ListaRevision.Count(n => n.Equals(true)) >= N - 1)
+                if (ListaRevision.Count(n => n.Equals(true)) >= x - 1)
                 {
                     for (int i = 0; i < CklLista.Items.Count; i++)
                     {
                         CklLista.SetItemChecked(i, false);//reinicia los checks
                     }
-                    MessageBox.Show($"Todas las imagenes se mostraron {N}");
+                    MessageBox.Show($"Todas las imagenes se mostraron {x}");
                     BtnMostrarImagen.Text = "Mostrar imagen";
                     GenerarLista();//en este limpia la lista de revision
                     PicExpositor.BackgroundImage = null;
@@ -187,7 +186,7 @@ namespace ExpositorDeImagenes
                     OpenFileDialog file = new OpenFileDialog
                     {
                         Filter = "Archivos de música(*.mp3) | *.mp3",
-                        Title = "Archivos mp3"
+                        Title = "Selecciona tu archivo mp3"
                     };
                     if (file.ShowDialog() == DialogResult.OK)
                     {
@@ -290,7 +289,7 @@ namespace ExpositorDeImagenes
 
         private void BtnActualizar_MouseHover(object sender, EventArgs e)
         {
-            TipExpositor.SetToolTip(BtnActualizar, "Actualiza la lista del expositor");
+            TipExpositor.SetToolTip(BtnActualizar, "Actualiza la lista del expositor y limpia la música");
         }
 
         private void BtnMusica_MouseHover(object sender, EventArgs e)
