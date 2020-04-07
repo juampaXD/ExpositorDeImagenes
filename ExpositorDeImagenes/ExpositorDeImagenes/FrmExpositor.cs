@@ -108,20 +108,6 @@ namespace ExpositorDeImagenes
 
         private void BtnMostrarImagen_Click(object sender, EventArgs e)
         {
-            if (Directory.EnumerateFiles(Environment.SpecialFolder.MyPictures.ToString()).Count() == 0)
-            {
-                OpenFileDialog file = new OpenFileDialog
-                {
-                    Filter = "Imagenes a añadir(*.JPG;*.JPE;*.JPEG) | *.JPG; *.JPE; *.JPEG",
-                    Title = "Selecciona tus imagenes a añadir",
-                    Multiselect = true
-                };
-                if (file.ShowDialog() == DialogResult.OK)
-                {
-                    MessageBox.Show("Añadir imagenes");
-                }
-                file.Dispose();
-            }
             if (BtnMostrarImagen.Text == "Mostrar imagen")
             {
                 BtnMostrarImagen.Text = "Cambiar imagen";
@@ -368,6 +354,33 @@ namespace ExpositorDeImagenes
                 ChkMarcadoManual.Checked = true;
             else
                 ChkMarcadoManual.Checked = false;
+        }
+
+        private void SalirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Directory.EnumerateFiles(Environment.SpecialFolder.MyPictures.ToString()).Count() == 0)
+            {
+                OpenFileDialog file = new OpenFileDialog
+                {
+                    Filter = "Imagenes a añadir(*.JPG;*.JPE;*.JPEG) | *.JPG; *.JPE; *.JPEG",
+                    Title = "Selecciona tus imagenes a añadir",
+                    Multiselect = true
+                };
+                if (file.ShowDialog() == DialogResult.OK)
+                {
+                    foreach (var item in file.FileNames)
+                    {//organizar
+                        File.Copy(item, Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString())[0]);
+                    }
+
+                }
+                file.Dispose();
+            }
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
