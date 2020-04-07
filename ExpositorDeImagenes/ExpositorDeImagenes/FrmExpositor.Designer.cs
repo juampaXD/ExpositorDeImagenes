@@ -40,8 +40,14 @@
             this.LblPorcentaje = new System.Windows.Forms.Label();
             this.ChkMarcadoManual = new System.Windows.Forms.CheckBox();
             this.TipExpositor = new System.Windows.Forms.ToolTip(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // PicExpositor
@@ -49,7 +55,7 @@
             this.PicExpositor.BackColor = System.Drawing.Color.White;
             this.PicExpositor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicExpositor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PicExpositor.Location = new System.Drawing.Point(18, 13);
+            this.PicExpositor.Location = new System.Drawing.Point(15, 37);
             this.PicExpositor.Name = "PicExpositor";
             this.PicExpositor.Size = new System.Drawing.Size(332, 322);
             this.PicExpositor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -61,7 +67,7 @@
             // 
             this.BtnMostrarImagen.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnMostrarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BtnMostrarImagen.Location = new System.Drawing.Point(377, 17);
+            this.BtnMostrarImagen.Location = new System.Drawing.Point(374, 41);
             this.BtnMostrarImagen.Name = "BtnMostrarImagen";
             this.BtnMostrarImagen.Size = new System.Drawing.Size(68, 34);
             this.BtnMostrarImagen.TabIndex = 1;
@@ -76,7 +82,7 @@
             this.ChkRepetir.Checked = true;
             this.ChkRepetir.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChkRepetir.ForeColor = System.Drawing.Color.White;
-            this.ChkRepetir.Location = new System.Drawing.Point(377, 67);
+            this.ChkRepetir.Location = new System.Drawing.Point(374, 91);
             this.ChkRepetir.Name = "ChkRepetir";
             this.ChkRepetir.Size = new System.Drawing.Size(77, 17);
             this.ChkRepetir.TabIndex = 2;
@@ -91,7 +97,7 @@
             this.BtnMusica.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnMusica.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnMusica.Image = ((System.Drawing.Image)(resources.GetObject("BtnMusica.Image")));
-            this.BtnMusica.Location = new System.Drawing.Point(487, 68);
+            this.BtnMusica.Location = new System.Drawing.Point(484, 92);
             this.BtnMusica.Name = "BtnMusica";
             this.BtnMusica.Size = new System.Drawing.Size(68, 36);
             this.BtnMusica.TabIndex = 6;
@@ -104,7 +110,7 @@
             this.BtnActualizar.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("BtnActualizar.Image")));
-            this.BtnActualizar.Location = new System.Drawing.Point(487, 17);
+            this.BtnActualizar.Location = new System.Drawing.Point(484, 41);
             this.BtnActualizar.Name = "BtnActualizar";
             this.BtnActualizar.Size = new System.Drawing.Size(68, 36);
             this.BtnActualizar.TabIndex = 5;
@@ -116,7 +122,7 @@
             // 
             this.TrbVolumen.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.TrbVolumen.Enabled = false;
-            this.TrbVolumen.Location = new System.Drawing.Point(578, 44);
+            this.TrbVolumen.Location = new System.Drawing.Point(570, 81);
             this.TrbVolumen.Maximum = 100;
             this.TrbVolumen.Name = "TrbVolumen";
             this.TrbVolumen.Orientation = System.Windows.Forms.Orientation.Vertical;
@@ -131,7 +137,7 @@
             // 
             this.CklLista.FormattingEnabled = true;
             this.CklLista.HorizontalScrollbar = true;
-            this.CklLista.Location = new System.Drawing.Point(377, 121);
+            this.CklLista.Location = new System.Drawing.Point(374, 145);
             this.CklLista.Name = "CklLista";
             this.CklLista.ScrollAlwaysVisible = true;
             this.CklLista.SelectionMode = System.Windows.Forms.SelectionMode.None;
@@ -144,7 +150,7 @@
             this.LblPorcentaje.AutoSize = true;
             this.LblPorcentaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblPorcentaje.ForeColor = System.Drawing.Color.White;
-            this.LblPorcentaje.Location = new System.Drawing.Point(565, 17);
+            this.LblPorcentaje.Location = new System.Drawing.Point(562, 41);
             this.LblPorcentaje.Name = "LblPorcentaje";
             this.LblPorcentaje.Size = new System.Drawing.Size(59, 24);
             this.LblPorcentaje.TabIndex = 8;
@@ -156,7 +162,7 @@
             this.ChkMarcadoManual.AutoSize = true;
             this.ChkMarcadoManual.BackColor = System.Drawing.Color.Black;
             this.ChkMarcadoManual.ForeColor = System.Drawing.Color.White;
-            this.ChkMarcadoManual.Location = new System.Drawing.Point(377, 87);
+            this.ChkMarcadoManual.Location = new System.Drawing.Point(374, 111);
             this.ChkMarcadoManual.Name = "ChkMarcadoManual";
             this.ChkMarcadoManual.Size = new System.Drawing.Size(105, 17);
             this.ChkMarcadoManual.TabIndex = 3;
@@ -173,12 +179,50 @@
             this.TipExpositor.ToolTipTitle = "Guía";
             this.TipExpositor.UseAnimation = false;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(628, 24);
+            this.menuStrip1.TabIndex = 9;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // archivoToolStripMenuItem
+            // 
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregarToolStripMenuItem,
+            this.editarToolStripMenuItem,
+            this.salirToolStripMenuItem});
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // agregarToolStripMenuItem
+            // 
+            this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agregarToolStripMenuItem.Text = "Agregar";
+            // 
+            // editarToolStripMenuItem
+            // 
+            this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editarToolStripMenuItem.Text = "Editar";
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Text = "Salir";
+            // 
             // FrmExpositor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(639, 348);
+            this.ClientSize = new System.Drawing.Size(628, 374);
             this.Controls.Add(this.ChkMarcadoManual);
             this.Controls.Add(this.LblPorcentaje);
             this.Controls.Add(this.CklLista);
@@ -188,14 +232,16 @@
             this.Controls.Add(this.ChkRepetir);
             this.Controls.Add(this.BtnMostrarImagen);
             this.Controls.Add(this.PicExpositor);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(655, 387);
-            this.MinimumSize = new System.Drawing.Size(655, 387);
             this.Name = "FrmExpositor";
             this.Text = "Expositor";
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,6 +259,11 @@
         private System.Windows.Forms.Label LblPorcentaje;
         private System.Windows.Forms.CheckBox ChkMarcadoManual;
         private System.Windows.Forms.ToolTip TipExpositor;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem agregarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
     }
 }
 

@@ -108,6 +108,20 @@ namespace ExpositorDeImagenes
 
         private void BtnMostrarImagen_Click(object sender, EventArgs e)
         {
+            if (Directory.EnumerateFiles(Environment.SpecialFolder.MyPictures.ToString()).Count() == 0)
+            {
+                OpenFileDialog file = new OpenFileDialog
+                {
+                    Filter = "Imagenes a añadir(*.JPG;*.JPE;*.JPEG) | *.JPG; *.JPE; *.JPEG",
+                    Title = "Selecciona tus imagenes a añadir",
+                    Multiselect = true
+                };
+                if (file.ShowDialog() == DialogResult.OK)
+                {
+                    MessageBox.Show("Añadir imagenes");
+                }
+                file.Dispose();
+            }
             if (BtnMostrarImagen.Text == "Mostrar imagen")
             {
                 BtnMostrarImagen.Text = "Cambiar imagen";
