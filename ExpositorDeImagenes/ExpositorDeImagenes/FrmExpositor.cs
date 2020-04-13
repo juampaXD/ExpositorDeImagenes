@@ -59,7 +59,7 @@ namespace ExpositorDeImagenes
         }
 
         private void CargarImagenes()
-        {
+        {//CORREGIR AL USAR ARCHIVOS CON OTRAS EXTENSIONES *.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG
             /*Obtiene las imagenes*/
             ListaImagenes = new ImageList//se simplifica y configura de manera mas sencilla
             {
@@ -361,26 +361,26 @@ namespace ExpositorDeImagenes
             Application.Exit();
         }
 
-        private void agregarToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AgregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Directory.EnumerateFiles(Environment.SpecialFolder.MyPictures.ToString()).Count() == 0)
-            {
                 OpenFileDialog file = new OpenFileDialog
                 {
-                    Filter = "Imagenes a añadir(*.JPG;*.JPE;*.JPEG) | *.JPG; *.JPE; *.JPEG",
+                    Filter = "Imagenes a añadir(*.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG)|*.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG",
                     Title = "Selecciona tus imagenes a añadir",
                     Multiselect = true
                 };
                 if (file.ShowDialog() == DialogResult.OK)
                 {
+                    string name;
                     foreach (var item in file.FileNames)
                     {//organizar
-                        File.Copy(item, Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString())[0]);
+                        name = item.Split('\\')[item.Split('\\').Count() - 1];
+                        File.Copy(item, Environment.SpecialFolder.MyPictures.ToString()+@"\"+name,true);
+                        Actulizar();
                     }
-
                 }
                 file.Dispose();
-            }
+            
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
