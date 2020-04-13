@@ -14,6 +14,7 @@ namespace ExpositorDeImagenes
     public partial class FrmExpositor : Form
     {
         private List<bool> ListaRevision = new List<bool>();
+        List<string> path;
         private ImageList ListaImagenes;
         private bool Estado = false, NoRepetir = true; //nos permite revisar si se debe repetir la musica y si esta reproduciendo o no
         private SoundPlayer SoundPlayer;
@@ -66,7 +67,7 @@ namespace ExpositorDeImagenes
                 ColorDepth = ColorDepth.Depth32Bit,
                 ImageSize = new Size(250, 250)
             };
-            List<string> path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").ToList<string>();
+            path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).Where(f =>f.EndsWith(".GIF",StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) ||f.EndsWith(".BMP", StringComparison.OrdinalIgnoreCase) ||f.EndsWith(".WMF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".PNG", StringComparison.OrdinalIgnoreCase)).ToList<string>();
             int i = 0;
             foreach (var item in path)
             {
@@ -77,21 +78,21 @@ namespace ExpositorDeImagenes
 
         private void GenerarLista()
         {//rellena la lista de comprobación
-            if (Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length != ListaRevision.Count)
+            if (path.Count != ListaRevision.Count)
             {
                 CklLista.Items.Clear();
                 ListaRevision.Clear();
             }
             if (CklLista.Items.Count == 0)
             {
-                for (int i = 0; i < Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length; i++)
+                for (int i = 0; i < path.Count; i++)
                 {
                     ListaRevision.Add(false);
                 }
             }
             else
             {
-                for (int i = 0; i < Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg").Length; i++)
+                for (int i = 0; i < path.Count; i++)
                 {
                     ListaRevision[i] = false;
                 }
@@ -102,7 +103,7 @@ namespace ExpositorDeImagenes
         {//llena la lista
             for (int i = 0; i < ListaRevision.Count; i++)
             {
-                CklLista.Items.Add(Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString(), "*.jpg")[i].Split('\\')[1] + (i + 1), CheckState.Unchecked);
+                CklLista.Items.Add(path[i].Split('\\')[1], CheckState.Unchecked);
             }
         }
 
