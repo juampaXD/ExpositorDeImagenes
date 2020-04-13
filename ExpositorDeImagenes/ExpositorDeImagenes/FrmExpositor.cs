@@ -122,6 +122,11 @@ namespace ExpositorDeImagenes
                 Random Rand = new Random();
                 if (ListaRevision.Count(n => n.Equals(true)) >= x - 1)
                 {
+                    if (ListaRevision.Count ==0)
+                    {
+                        MessageBox.Show("No hay imagenes disponibles para mostrar, añadalas por favor o actualice la lista");
+                        return;
+                    }
                     for (int i = 0; i < CklLista.Items.Count; i++)
                     {
                         CklLista.SetItemChecked(i, false);//reinicia los checks
