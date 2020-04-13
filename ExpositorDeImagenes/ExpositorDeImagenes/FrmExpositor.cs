@@ -60,7 +60,7 @@ namespace ExpositorDeImagenes
         }
 
         private void CargarImagenes()
-        {//CORREGIR AL USAR ARCHIVOS CON OTRAS EXTENSIONES *.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG
+        {
             /*Obtiene las imagenes*/
             ListaImagenes = new ImageList//se simplifica y configura de manera mas sencilla
             {
