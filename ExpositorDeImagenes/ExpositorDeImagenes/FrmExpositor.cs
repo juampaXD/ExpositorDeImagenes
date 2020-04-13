@@ -121,23 +121,7 @@ namespace ExpositorDeImagenes
             {
                 int N = x;
                 Random Rand = new Random();
-                if (ListaRevision.Count(n => n.Equals(true)) >= x - 1)
-                {
-                    if (ListaRevision.Count ==0)
-                    {
-                        MessageBox.Show("No hay imagenes disponibles para mostrar, añadalas por favor o actualice la lista");
-                        return;
-                    }
-                    for (int i = 0; i < CklLista.Items.Count; i++)
-                    {
-                        CklLista.SetItemChecked(i, false);//reinicia los checks
-                    }
-                    MessageBox.Show($"Todas las imagenes se mostraron {x}");
-                    BtnMostrarImagen.Text = "Mostrar imagen";
-                    GenerarLista();//en este limpia la lista de revision
-                    PicExpositor.BackgroundImage = null;
-                    return;
-                }
+                
                 if (NoRepetir)
                 {
                     do
@@ -152,6 +136,24 @@ namespace ExpositorDeImagenes
                 else
                 {
                     N = Rand.Next(0, x);
+                }
+                if (ListaRevision.Count(n => n.Equals(true)) >= x - 1)
+                {
+                    if (ListaRevision.Count == 0)
+                    {
+                        MessageBox.Show("No hay imagenes disponibles para mostrar, añadalas por favor o actualice la lista");
+                        return;
+                    }
+                    MostrarImagen(N);
+                    for (int i = 0; i < CklLista.Items.Count; i++)
+                    {
+                        CklLista.SetItemChecked(i, false);//reinicia los checks
+                    }
+                    MessageBox.Show($"Todas las imagenes se mostraron");
+                    BtnMostrarImagen.Text = "Mostrar imagen";
+                    GenerarLista();//en este limpia la lista de revision
+                    PicExpositor.BackgroundImage = null;
+                    return;
                 }
                 MostrarImagen(N);
             }
