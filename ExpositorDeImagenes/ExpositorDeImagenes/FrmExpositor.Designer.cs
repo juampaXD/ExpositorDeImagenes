@@ -232,12 +232,14 @@
             this.imágenesToolStripMenuItem1.Name = "imágenesToolStripMenuItem1";
             this.imágenesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.imágenesToolStripMenuItem1.Text = "Imágenes";
+            this.imágenesToolStripMenuItem1.Click += new System.EventHandler(this.ImágenesToolStripMenuItem1_Click);
             // 
             // músicaToolStripMenuItem1
             // 
             this.músicaToolStripMenuItem1.Name = "músicaToolStripMenuItem1";
             this.músicaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.músicaToolStripMenuItem1.Text = "Música";
+            this.músicaToolStripMenuItem1.Click += new System.EventHandler(this.MúsicaToolStripMenuItem1_Click);
             // 
             // FrmExpositor
             // 

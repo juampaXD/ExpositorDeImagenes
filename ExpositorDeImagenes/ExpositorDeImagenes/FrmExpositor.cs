@@ -49,7 +49,7 @@ namespace ExpositorDeImagenes
                 if (e is ArgumentOutOfRangeException || e is IndexOutOfRangeException)
                 {
                     TrbVolumen.Value = 0;
-                    LblPorcentaje.Text = TrbVolumen.Value+" %";
+                    LblPorcentaje.Text = TrbVolumen.Value + " %";
                 }
             }
         }
@@ -197,7 +197,6 @@ namespace ExpositorDeImagenes
                     }
                     file.Dispose();
                 }
-
                 PrepararAudios();
                 Estado = true;
                 SoundPlayer.PlayLooping();
@@ -260,14 +259,15 @@ namespace ExpositorDeImagenes
                     {
                         MessageBox.Show("Error no controlado" + ex.Message);
                     }
+                    Actualizar();
+                    PonerMusica();
+                    if (TrbVolumen.Value == 0)
+                    {
+                        TrbVolumen.Value = 5;
+                    }
                 }
             }
-            Actualizar();
-            PonerMusica();
-            if (TrbVolumen.Value == 0)
-            {
-                TrbVolumen.Value = 5;
-            }
+
         }
         private void Actualizar()
         {
@@ -408,23 +408,35 @@ namespace ExpositorDeImagenes
             file.Dispose();
             Actualizar();
         }
-        private void ActualizarAgregar()
-        {
-            PicExpositor.BackgroundImage = null;
-            path.Clear();
-            path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).Where(f => f.EndsWith(".GIF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".BMP", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".WMF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".PNG", StringComparison.OrdinalIgnoreCase)).ToList<string>();
-
-            CklLista.Items.Clear();
-            ListaRevision.Clear();
-            GenerarLista();
-        }
 
         private void FrmExpositor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("¿Seguro(a) que desea cerrar la aplicación?","Advertencia",MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation)== DialogResult.No)
+            if (MessageBox.Show("¿Seguro(a) que desea cerrar la aplicación?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
             {
                 e.Cancel = true;
             }
+        }
+
+        private void ImágenesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Quieres vaciar las imagenes y la lista?", "Limpieza", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                List<string> s = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).ToList();
+                foreach (var item in s)
+                {
+                    File.Delete(item);
+                }
+                path.Clear();
+                ListaRevision.Clear();
+                CklLista.Items.Clear();
+                PicExpositor.BackgroundImage = null;
+                PicExpositor.BackColor = Color.White;
+            }
+        }
+
+        private void MúsicaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            File.Delete(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
