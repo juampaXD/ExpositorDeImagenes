@@ -44,6 +44,9 @@
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.limpiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.imágenesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.músicaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -130,6 +133,7 @@
             this.TrbVolumen.TabIndex = 7;
             this.TrbVolumen.Tag = "";
             this.TrbVolumen.Scroll += new System.EventHandler(this.TrbVolumen_Scroll);
+            this.TrbVolumen.ValueChanged += new System.EventHandler(this.TrbVolumen_Scroll);
             this.TrbVolumen.MouseHover += new System.EventHandler(this.TrbVolumen_MouseHover);
             // 
             // CklLista
@@ -192,6 +196,7 @@
             // 
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.agregarToolStripMenuItem,
+            this.limpiarToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
@@ -201,7 +206,7 @@
             // 
             this.agregarToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.agregarToolStripMenuItem.Text = "Agregar";
             this.agregarToolStripMenuItem.Click += new System.EventHandler(this.AgregarToolStripMenuItem_Click);
             // 
@@ -209,9 +214,30 @@
             // 
             this.salirToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
+            // 
+            // limpiarToolStripMenuItem
+            // 
+            this.limpiarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.imágenesToolStripMenuItem1,
+            this.músicaToolStripMenuItem1});
+            this.limpiarToolStripMenuItem.Name = "limpiarToolStripMenuItem";
+            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.limpiarToolStripMenuItem.Text = "Limpiar";
+            // 
+            // imágenesToolStripMenuItem1
+            // 
+            this.imágenesToolStripMenuItem1.Name = "imágenesToolStripMenuItem1";
+            this.imágenesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.imágenesToolStripMenuItem1.Text = "Imágenes";
+            // 
+            // músicaToolStripMenuItem1
+            // 
+            this.músicaToolStripMenuItem1.Name = "músicaToolStripMenuItem1";
+            this.músicaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.músicaToolStripMenuItem1.Text = "Música";
             // 
             // FrmExpositor
             // 
@@ -234,6 +260,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmExpositor";
             this.Text = "Expositor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmExpositor_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -259,6 +286,9 @@
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem agregarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem limpiarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem imágenesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem músicaToolStripMenuItem1;
     }
 }
 

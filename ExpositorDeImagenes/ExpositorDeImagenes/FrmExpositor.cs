@@ -15,7 +15,7 @@ namespace ExpositorDeImagenes
     {
         private List<bool> ListaRevision = new List<bool>();
         List<string> path;
-        private ImageList ListaImagenes;
+        private Image imagen;
         private bool Estado = false, NoRepetir = true; //nos permite revisar si se debe repetir la musica y si esta reproduciendo o no
         private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
@@ -28,7 +28,7 @@ namespace ExpositorDeImagenes
         private void Iniciar()
         {
             CrearCarpetas();
-            CargarImagenes();
+            CargarPath();
             GenerarLista();
             RellenarLista();
             PrepararAudios();
@@ -49,6 +49,7 @@ namespace ExpositorDeImagenes
                 if (e is ArgumentOutOfRangeException || e is IndexOutOfRangeException)
                 {
                     TrbVolumen.Value = 0;
+                    LblPorcentaje.Text = TrbVolumen.Value+" %";
                 }
             }
         }
@@ -59,21 +60,9 @@ namespace ExpositorDeImagenes
             Directory.CreateDirectory(Environment.SpecialFolder.MyMusic.ToString());
         }
 
-        private void CargarImagenes()
-        {
-            /*Obtiene las imagenes*/
-            ListaImagenes = new ImageList//se simplifica y configura de manera mas sencilla
-            {
-                ColorDepth = ColorDepth.Depth32Bit,
-                ImageSize = new Size(250, 250)
-            };
-            path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).Where(f =>f.EndsWith(".GIF",StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) ||f.EndsWith(".BMP", StringComparison.OrdinalIgnoreCase) ||f.EndsWith(".WMF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".PNG", StringComparison.OrdinalIgnoreCase)).ToList<string>();
-            int i = 0;
-            foreach (var item in path)
-            {
-                ListaImagenes.Images.Add(i.ToString(), Image.FromFile(item));
-                i++;
-            }
+        private void CargarPath()
+        {//obtiene los directorios de las imagenes
+            path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).Where(f => f.EndsWith(".GIF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".BMP", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".WMF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".PNG", StringComparison.OrdinalIgnoreCase)).ToList<string>();
         }
 
         private void GenerarLista()
@@ -121,7 +110,7 @@ namespace ExpositorDeImagenes
             {
                 int N = x;
                 Random Rand = new Random();
-                
+
                 if (NoRepetir)
                 {
                     do
@@ -165,9 +154,15 @@ namespace ExpositorDeImagenes
 
         private void MostrarImagen(int x)
         {
+            if (imagen != null)
+            {
+                PicExpositor.BackgroundImage = null;
+                imagen.Dispose();
+            }
             try
             {
-                PicExpositor.BackgroundImage = ListaImagenes.Images[x];
+                imagen = Image.FromFile(path[x]);
+                PicExpositor.BackgroundImage = imagen;
                 CklLista.SetItemChecked(x, true);
                 ListaRevision[x] = true;
             }
@@ -175,7 +170,7 @@ namespace ExpositorDeImagenes
             { MessageBox.Show("imagenes no encontradas"); }
         }
         private void BtnMusica_Click(object sender, EventArgs e)
-        {//añadir un buscador
+        {
             if (Estado == false)
             {
                 PonerMusica();
@@ -226,7 +221,6 @@ namespace ExpositorDeImagenes
                 SoundPlayer.Stop();
                 SoundPlayer.Dispose();
                 Estado = false;
-                TrbVolumen.Value = 0;
             }
             catch (NullReferenceException)
             { }
@@ -245,22 +239,46 @@ namespace ExpositorDeImagenes
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
-            Actulizar();
+            if (File.Exists(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav"))
+            {
+                if (MessageBox.Show("¿Desea actualizar la música de fondo?", "actualizar musica", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        File.Delete(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
+                        OpenFileDialog file = new OpenFileDialog()
+                        {
+                            Multiselect = false,
+                            Filter = "Archivos de música(*.mp3) | *.mp3",
+                            Title = "Selecciona tu archivo mp3"
+                        };
+                        file.ShowDialog();
+                        ConvertiraWav(file.FileName);
+                        file.Dispose();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error no controlado" + ex.Message);
+                    }
+                }
+            }
+            Actualizar();
+            PonerMusica();
+            if (TrbVolumen.Value == 0)
+            {
+                TrbVolumen.Value = 5;
+            }
         }
-        private void Actulizar()
+        private void Actualizar()
         {
             PararMusica();
-            File.Delete(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
+            PicExpositor.BackColor = Color.White;
             ListaRevision.Clear();
             CklLista.Items.Clear();
-
-            if (PicExpositor.Image != null)
-            {
-                PicExpositor.Image.Dispose();
-            }
+            path.Clear();
+            CargarPath();
             GenerarLista();
             RellenarLista();
-            PicExpositor.BackColor = Color.White;
         }
 
         private void TrbVolumen_Scroll(object sender, EventArgs e)
@@ -371,24 +389,42 @@ namespace ExpositorDeImagenes
 
         private void AgregarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                OpenFileDialog file = new OpenFileDialog
+            OpenFileDialog file = new OpenFileDialog
+            {
+                Filter = "Imagenes a añadir(*.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG)|*.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG",
+                Title = "Selecciona tus imagenes a añadir",
+                Multiselect = true
+            };//organizar al agregar actualizar
+
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                string name;
+                foreach (var item in file.FileNames)
                 {
-                    Filter = "Imagenes a añadir(*.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG)|*.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG",
-                    Title = "Selecciona tus imagenes a añadir",
-                    Multiselect = true
-                };
-                if (file.ShowDialog() == DialogResult.OK)
-                {
-                    string name;
-                    foreach (var item in file.FileNames)
-                    {//organizar
-                        name = item.Split('\\')[item.Split('\\').Count() - 1];
-                        File.Copy(item, Environment.SpecialFolder.MyPictures.ToString()+@"\"+name,true);
-                        Actulizar();
-                    }
+                    name = item.Split('\\')[item.Split('\\').Count() - 1];
+                    File.Copy(item, Environment.SpecialFolder.MyPictures.ToString() + @"\" + name, true);
                 }
-                file.Dispose();
-            
+            }
+            file.Dispose();
+            Actualizar();
+        }
+        private void ActualizarAgregar()
+        {
+            PicExpositor.BackgroundImage = null;
+            path.Clear();
+            path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).Where(f => f.EndsWith(".GIF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".BMP", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".WMF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".PNG", StringComparison.OrdinalIgnoreCase)).ToList<string>();
+
+            CklLista.Items.Clear();
+            ListaRevision.Clear();
+            GenerarLista();
+        }
+
+        private void FrmExpositor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("¿Seguro(a) que desea cerrar la aplicación?","Advertencia",MessageBoxButtons.YesNo,MessageBoxIcon.Exclamation)== DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
