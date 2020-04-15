@@ -394,7 +394,7 @@ namespace ExpositorDeImagenes
                 Filter = "Imagenes a añadir(*.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG)|*.GIF;*.JPG;*.JPEG;*.BMP;*.WMF;*.PNG",
                 Title = "Selecciona tus imagenes a añadir",
                 Multiselect = true
-            };//organizar al agregar actualizar
+            };
 
             if (file.ShowDialog() == DialogResult.OK)
             {
@@ -421,6 +421,13 @@ namespace ExpositorDeImagenes
         {
             if (MessageBox.Show("¿Quieres vaciar las imagenes y la lista?", "Limpieza", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                try
+                {
+                    PicExpositor.BackgroundImage.Dispose();
+                }
+                catch (NullReferenceException)
+                { }
+                PicExpositor.BackgroundImage = null;
                 List<string> s = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).ToList();
                 foreach (var item in s)
                 {
@@ -429,7 +436,6 @@ namespace ExpositorDeImagenes
                 path.Clear();
                 ListaRevision.Clear();
                 CklLista.Items.Clear();
-                PicExpositor.BackgroundImage = null;
                 PicExpositor.BackColor = Color.White;
             }
         }

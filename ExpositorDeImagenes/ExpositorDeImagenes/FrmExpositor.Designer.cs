@@ -43,10 +43,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.limpiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imágenesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.músicaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -206,17 +206,9 @@
             // 
             this.agregarToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
-            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.agregarToolStripMenuItem.Text = "Agregar";
             this.agregarToolStripMenuItem.Click += new System.EventHandler(this.AgregarToolStripMenuItem_Click);
-            // 
-            // salirToolStripMenuItem
-            // 
-            this.salirToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.salirToolStripMenuItem.Text = "Salir";
-            this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
             // 
             // limpiarToolStripMenuItem
             // 
@@ -224,22 +216,30 @@
             this.imágenesToolStripMenuItem1,
             this.músicaToolStripMenuItem1});
             this.limpiarToolStripMenuItem.Name = "limpiarToolStripMenuItem";
-            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.limpiarToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.limpiarToolStripMenuItem.Text = "Limpiar";
             // 
             // imágenesToolStripMenuItem1
             // 
             this.imágenesToolStripMenuItem1.Name = "imágenesToolStripMenuItem1";
-            this.imágenesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.imágenesToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
             this.imágenesToolStripMenuItem1.Text = "Imágenes";
             this.imágenesToolStripMenuItem1.Click += new System.EventHandler(this.ImágenesToolStripMenuItem1_Click);
             // 
             // músicaToolStripMenuItem1
             // 
             this.músicaToolStripMenuItem1.Name = "músicaToolStripMenuItem1";
-            this.músicaToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.músicaToolStripMenuItem1.Size = new System.Drawing.Size(125, 22);
             this.músicaToolStripMenuItem1.Text = "Música";
             this.músicaToolStripMenuItem1.Click += new System.EventHandler(this.MúsicaToolStripMenuItem1_Click);
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
             // 
             // FrmExpositor
             // 
@@ -260,6 +260,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(644, 413);
+            this.MinimumSize = new System.Drawing.Size(644, 413);
             this.Name = "FrmExpositor";
             this.Text = "Expositor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmExpositor_FormClosing);
