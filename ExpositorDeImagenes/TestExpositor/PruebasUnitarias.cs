@@ -21,11 +21,10 @@ namespace TestExpositor
         {//prueba unitaria para escoger números diferentes a los activos
             int Tamaño = 5;
             int num = 0;//número que no debe repetirse
-            for (int i = 0; i < Tamaño; i++)
+            for (int i = 0; i <= Tamaño; i++)
             {
                 if (i == num) { ListTest.Add(true); } else { ListTest.Add(false); }
             }
-            ListTest.Add(false);
 
             for (int i = 0; i < Tamaño; i++)
             {
