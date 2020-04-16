@@ -45,14 +45,12 @@ namespace TestExpositor
         public void TestEscogerConSoloElementoEnLaLista()
         {
             ListTest.Add(false);
-            e.EscogerNumero(ListTest.Count,ListTest);
-            Assert.AreEqual(0, 0);
+            Assert.AreEqual(0, e.EscogerNumero(ListTest.Count, ListTest));
         }
         [TestMethod]
         public void TestEscogerConNingunElemento()
         {
-            e.EscogerNumero(ListTest.Count,ListTest);
-            Assert.AreEqual(-1, -1);
+            Assert.AreEqual(-1, e.EscogerNumero(ListTest.Count, ListTest));
         }
     }
 }
