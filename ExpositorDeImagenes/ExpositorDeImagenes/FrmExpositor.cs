@@ -102,54 +102,64 @@ namespace ExpositorDeImagenes
             {
                 BtnMostrarImagen.Text = "Cambiar imagen";
             }
-            EscogerNumero(CklLista.Items.Count);
-        }
-        public void EscogerNumero(int x)
-        {
-            try
-            {
-                int N = x;
-                Random Rand = new Random();
 
-                if (NoRepetir)
+            int N = EscogerNumero(CklLista.Items.Count,ListaRevision);
+            if (N ==-1)
+            {
+                MessageBox.Show("No hay elementos en la lista", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (ListaRevision.Count(n => n.Equals(true)) >= CklLista.Items.Count - 1)
+            {
+                if (ListaRevision.Count == 0)
                 {
-                    do
-                    {
-                        N = Rand.Next(0, x);
-                        if (ListaRevision[N].Equals(false))
-                        {
-                            break;
-                        }
-                    } while (true);
-                }
-                else
-                {
-                    N = Rand.Next(0, x);
-                }
-                if (ListaRevision.Count(n => n.Equals(true)) >= x - 1)
-                {
-                    if (ListaRevision.Count == 0)
-                    {
-                        MessageBox.Show("No hay imagenes disponibles para mostrar, añadalas por favor o actualice la lista");
-                        return;
-                    }
-                    MostrarImagen(N);
-                    for (int i = 0; i < CklLista.Items.Count; i++)
-                    {
-                        CklLista.SetItemChecked(i, false);//reinicia los checks
-                    }
-                    MessageBox.Show($"Todas las imagenes se mostraron");
-                    BtnMostrarImagen.Text = "Mostrar imagen";
-                    GenerarLista();//en este limpia la lista de revision
-                    PicExpositor.BackgroundImage = null;
+                    MessageBox.Show("No hay imagenes disponibles para mostrar, añadalas por favor o actualice la lista");
                     return;
                 }
                 MostrarImagen(N);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
+                for (int i = 0; i < CklLista.Items.Count; i++)
+                {
+                    CklLista.SetItemChecked(i, false);//reinicia los checks
+                }
+                MessageBox.Show($"Todas las imagenes se mostraron");
                 BtnMostrarImagen.Text = "Mostrar imagen";
+                GenerarLista();//en este limpia la lista de revision
+                PicExpositor.BackgroundImage = null;
+                imagen.Dispose();
+                return;
             }
+            MostrarImagen(N);
+        }
+        public int EscogerNumero(int x,List<bool>lista)
+        {
+            int N;
+
+            Random Rand = new Random();
+
+            if (NoRepetir)
+            {
+                do
+                {
+                    N = Rand.Next(0, x);
+                    try
+                    {
+                        if (lista[N].Equals(false))
+                        {
+                            break;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        return -1;
+                    }
+                } while (true);
+            }
+            else
+            {
+                N = Rand.Next(0, x);
+            }
+
+            return N;
         }
 
         private void MostrarImagen(int x)
@@ -428,6 +438,7 @@ namespace ExpositorDeImagenes
                 catch (NullReferenceException)
                 { }
                 PicExpositor.BackgroundImage = null;
+                PicExpositor.BackColor = Color.White;
                 List<string> s = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).ToList();
                 foreach (var item in s)
                 {
@@ -436,7 +447,6 @@ namespace ExpositorDeImagenes
                 path.Clear();
                 ListaRevision.Clear();
                 CklLista.Items.Clear();
-                PicExpositor.BackColor = Color.White;
             }
         }
 

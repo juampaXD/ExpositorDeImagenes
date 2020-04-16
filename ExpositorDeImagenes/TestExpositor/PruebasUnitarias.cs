@@ -5,61 +5,55 @@ using System.Collections.Generic;
 namespace TestExpositor
 {
     [TestClass]
-    public class UnitTest1
+    public class PruebasUnitarias
     {
         FrmExpositor e;
         List<bool> ListTest = new List<bool>();
+
         [TestInitialize]
         public void InicioP()
         {
             e = new FrmExpositor();
         }
+
         [TestMethod]
         public void TestEscogerNumeroDiferente()
-        {
+        {//prueba unitaria para escoger números diferentes a los activos
             int Tamaño = 5;
-
+            int num = 0;//número que no debe repetirse
             for (int i = 0; i < Tamaño; i++)
             {
-                if (i == 1) { ListTest.Add(true); } else { ListTest.Add(false); }
+                if (i == num) { ListTest.Add(true); } else { ListTest.Add(false); }
             }
             ListTest.Add(false);
 
             for (int i = 0; i < Tamaño; i++)
             {
-                e.EscogerNumero(ListTest, ListTest.Count, true);
-                Assert.AreNotEqual(1, e.N);
+                num = e.EscogerNumero(Tamaño, ListTest);
             }
+            Assert.AreNotEqual(1, num);
         }
         [TestMethod]
         public void TestEscogerUltimo()
-        {//o una posición en especifico
-
-            for (int i = 0; i < 5; i++)
+        {
+            for (int i = 0; i <= 5; i++)
             {
                 if (i == 5) { ListTest.Add(false); } else { ListTest.Add(true); }
             }
-
-            ListTest.Add(false);
-            e.EscogerNumero(ListTest, ListTest.Count, true);
-
-            Assert.AreEqual(5, e.N);
+            Assert.AreEqual(5, e.EscogerNumero(ListTest.Count, ListTest));
         }
         [TestMethod]
-        public void TestEscogerConSoloUnNumero()
+        public void TestEscogerConSoloElementoEnLaLista()
         {
             ListTest.Add(false);
-
-            e.EscogerNumero(ListTest, ListTest.Count, true);
-
-            Assert.AreEqual(0, e.N);
+            e.EscogerNumero(ListTest.Count,ListTest);
+            Assert.AreEqual(0, 0);
         }
         [TestMethod]
-        public void TestEscogerCon0Numeros()
+        public void TestEscogerConNingunElemento()
         {
-            e.EscogerNumero(ListTest, ListTest.Count, true);
-
-            Assert.AreEqual(0, e.N);
+            e.EscogerNumero(ListTest.Count,ListTest);
+            Assert.AreEqual(-1, -1);
         }
     }
 }
