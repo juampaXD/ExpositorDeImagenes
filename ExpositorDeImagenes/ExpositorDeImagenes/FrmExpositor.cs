@@ -19,7 +19,7 @@ namespace ExpositorDeImagenes
         private bool Estado = false, NoRepetir = true; //nos permite revisar si se debe repetir la musica y si esta reproduciendo o no
         private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
-
+        private Random Rand = new Random();
         public FrmExpositor()
         {
             InitializeComponent();
@@ -103,8 +103,8 @@ namespace ExpositorDeImagenes
                 BtnMostrarImagen.Text = "Cambiar imagen";
             }
 
-            int N = EscogerNumero(CklLista.Items.Count,ListaRevision);
-            if (N ==-1)
+            int N = EscogerNumero(CklLista.Items.Count, ListaRevision, NoRepetir);
+            if (N == -1)
             {
                 MessageBox.Show("No hay elementos en la lista", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -130,13 +130,10 @@ namespace ExpositorDeImagenes
             }
             MostrarImagen(N);
         }
-        public int EscogerNumero(int x,List<bool>lista)
+        public int EscogerNumero(int x, List<bool> lista, bool r)
         {
             int N;
-
-            Random Rand = new Random();
-
-            if (NoRepetir)
+            if (r)
             {
                 do
                 {
@@ -156,9 +153,8 @@ namespace ExpositorDeImagenes
             }
             else
             {
-                N = Rand.Next(0, x);
+                return Rand.Next(0, x);
             }
-
             return N;
         }
 

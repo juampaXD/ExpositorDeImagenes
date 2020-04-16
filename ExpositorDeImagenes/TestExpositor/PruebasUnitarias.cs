@@ -18,19 +18,14 @@ namespace TestExpositor
 
         [TestMethod]
         public void TestEscogerNumeroDiferente()
-        {//prueba unitaria para escoger números diferentes a los activos
+        {//prueba unitaria para escoger números diferentes al que esta activo
             int Tamaño = 5;
             int num = 0;//número que no debe repetirse
-            for (int i = 0; i <= Tamaño; i++)
+            for (int i = 0; i < Tamaño; i++)
             {
                 if (i == num) { ListTest.Add(true); } else { ListTest.Add(false); }
             }
-
-            for (int i = 0; i < Tamaño; i++)
-            {
-                num = e.EscogerNumero(Tamaño, ListTest);
-            }
-            Assert.AreNotEqual(1, num);
+            Assert.AreNotEqual(1, e.EscogerNumero(Tamaño, ListTest,true));
         }
         [TestMethod]
         public void TestEscogerUltimo()
@@ -39,18 +34,18 @@ namespace TestExpositor
             {
                 if (i == 5) { ListTest.Add(false); } else { ListTest.Add(true); }
             }
-            Assert.AreEqual(5, e.EscogerNumero(ListTest.Count, ListTest));
+            Assert.AreEqual(5, e.EscogerNumero(ListTest.Count, ListTest,true));
         }
         [TestMethod]
         public void TestEscogerConSoloElementoEnLaLista()
         {
             ListTest.Add(false);
-            Assert.AreEqual(0, e.EscogerNumero(ListTest.Count, ListTest));
+            Assert.AreEqual(0, e.EscogerNumero(ListTest.Count, ListTest,true));
         }
         [TestMethod]
         public void TestEscogerConNingunElemento()
         {
-            Assert.AreEqual(-1, e.EscogerNumero(ListTest.Count, ListTest));
+            Assert.AreEqual(-1, e.EscogerNumero(ListTest.Count, ListTest,true));
         }
     }
 }
