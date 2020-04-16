@@ -148,7 +148,7 @@ namespace ExpositorDeImagenes
                             break;
                         }
                     }
-                    catch (Exception)
+                    catch (ArgumentOutOfRangeException)
                     {
                         return -1;
                     }
