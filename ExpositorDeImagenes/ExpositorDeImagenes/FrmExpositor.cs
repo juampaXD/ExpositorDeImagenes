@@ -98,14 +98,12 @@ namespace ExpositorDeImagenes
 
         private void BtnMostrarImagen_Click(object sender, EventArgs e)
         {
-            if (BtnMostrarImagen.Text == "Mostrar imagen")
-            {
-                BtnMostrarImagen.Text = "Cambiar imagen";
-            }
+            BtnMostrarImagen.Text = "Cambiar imagen";
 
             int N = EscogerNumero(CklLista.Items.Count, ListaRevision, NoRepetir);
             if (N == -1)
             {
+                BtnMostrarImagen.Text = "Mostrar imagen";
                 MessageBox.Show("No hay elementos en la lista", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
@@ -113,6 +111,7 @@ namespace ExpositorDeImagenes
             {
                 if (ListaRevision.Count == 0)
                 {
+                    BtnMostrarImagen.Text = "Mostrar imagen";
                     MessageBox.Show("No hay imagenes disponibles para mostrar, añadalas por favor o actualice la lista");
                     return;
                 }
@@ -208,9 +207,11 @@ namespace ExpositorDeImagenes
                 SoundPlayer.PlayLooping();
                 TrbVolumen.Value = VolumenControl.Volume;
             }
+            catch (NullReferenceException)
+            { return; }
             catch (Exception ex)
             {
-                if (ex is NullReferenceException || ex is FileNotFoundException)
+                if (ex is FileNotFoundException)
                 {
                     TrbVolumen.Value = 0;
                     LblPorcentaje.Text = TrbVolumen.Value + "%";
