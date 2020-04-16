@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_77EBDE1BA9734686AD43169DE0922740"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B888D2C29AB14CEAABD1AA98ADC7C8A8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -125,7 +131,7 @@
         "InstallerBootstrapper" = "3:2"
             "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
             {
-            "Enabled" = "11:FALSE"
+            "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
             "PrerequisitesLocation" = "2:2"
             "Url" = "8:https://www.microsoft.com/es-co/download/details.aspx?id=17851"
@@ -223,6 +229,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_77EBDE1BA9734686AD43169DE0922740"
+            {
+            "SourcePath" = "8:..\\..\\Recursos\\presentación.ico"
+            "TargetName" = "8:presentación.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_D5B2F159B9214AAFBE042A26BB538DE0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C6A8364642A841E9AD2E8019DC19769A"
@@ -464,7 +490,7 @@
             "Target" = "8:_B888D2C29AB14CEAABD1AA98ADC7C8A8"
             "Folder" = "8:_2AFD6CCB6662448092A5D9DF80C2C9BC"
             "WorkingFolder" = "8:_D5B2F159B9214AAFBE042A26BB538DE0"
-            "Icon" = "8:"
+            "Icon" = "8:_77EBDE1BA9734686AD43169DE0922740"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_EA700FC928614FB79D9476B86EC82CD4"
@@ -478,7 +504,7 @@
             "Target" = "8:_B888D2C29AB14CEAABD1AA98ADC7C8A8"
             "Folder" = "8:_9616D70DBF1D409EB09861377C34CDF7"
             "WorkingFolder" = "8:_D5B2F159B9214AAFBE042A26BB538DE0"
-            "Icon" = "8:"
+            "Icon" = "8:_77EBDE1BA9734686AD43169DE0922740"
             "Feature" = "8:"
             }
         }
@@ -882,7 +908,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B888D2C29AB14CEAABD1AA98ADC7C8A8"
             {
-            "SourcePath" = "8:"
+            "SourcePath" = "8:..\\ExpositorDeImagenes\\obj\\Debug\\ExpositorDeImagenes.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D5B2F159B9214AAFBE042A26BB538DE0"
