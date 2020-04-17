@@ -133,11 +133,16 @@
             {
             "Enabled" = "11:TRUE"
             "PromptEnabled" = "11:TRUE"
-            "PrerequisitesLocation" = "2:2"
+            "PrerequisitesLocation" = "2:1"
             "Url" = "8:https://www.microsoft.com/es-co/download/details.aspx?id=17851"
             "ComponentsUrl" = "8:"
                 "Items"
                 {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5.2 (x86 y x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5.2"
+                    }
                 }
             }
         }
@@ -359,7 +364,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup Expositor"
         "ProductCode" = "8:{4685888B-64A7-40DB-96BE-AD72180D7800}"
-        "PackageCode" = "8:{7310EBAA-5988-4F1A-9F19-4CA2165E4DF4}"
+        "PackageCode" = "8:{5D6B4209-CF93-48B3-A0C6-6370FB49457A}"
         "UpgradeCode" = "8:{FB14D4C8-1603-4539-975A-C1FF94B014F6}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -908,7 +913,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B888D2C29AB14CEAABD1AA98ADC7C8A8"
             {
-            "SourcePath" = "8:..\\ExpositorDeImagenes\\obj\\Debug\\ExpositorDeImagenes.exe"
+            "SourcePath" = "8:..\\ExpositorDeImagenes\\obj\\Release\\ExpositorDeImagenes.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_D5B2F159B9214AAFBE042A26BB538DE0"
