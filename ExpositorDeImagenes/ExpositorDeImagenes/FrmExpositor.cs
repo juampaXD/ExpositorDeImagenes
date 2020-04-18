@@ -44,6 +44,10 @@ namespace ExpositorDeImagenes
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
             }
             catch (NullReferenceException) { MessageBox.Show("Dispositivo de reprodución no encontrado o no instalado"); }
+            catch (UnauthorizedAccessException)
+            {
+                AccesoDenegado();
+            }
             catch (Exception e)
             {
                 if (e is ArgumentOutOfRangeException || e is IndexOutOfRangeException)
@@ -62,7 +66,14 @@ namespace ExpositorDeImagenes
 
         private void CargarPath()
         {//obtiene los directorios de las imagenes
-            path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).Where(f => f.EndsWith(".GIF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".BMP", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".WMF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".PNG", StringComparison.OrdinalIgnoreCase)).ToList<string>();
+            try
+            {
+                path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).Where(f => f.EndsWith(".GIF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".BMP", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".WMF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".PNG", StringComparison.OrdinalIgnoreCase)).ToList<string>();
+            }
+            catch (UnauthorizedAccessException)
+            {
+                AccesoDenegado();
+            }
         }
 
         private void GenerarLista()
@@ -173,6 +184,10 @@ namespace ExpositorDeImagenes
             }
             catch (ArgumentOutOfRangeException)
             { MessageBox.Show("imagenes no encontradas"); }
+            catch (FileNotFoundException)
+            {
+                MessageBox.Show("imagenes no encontradas");
+            }
         }
         private void BtnMusica_Click(object sender, EventArgs e)
         {
@@ -233,14 +248,22 @@ namespace ExpositorDeImagenes
         }
         private void ConvertiraWav(string x)
         {
-            if (x.ToLower().Contains(".mp3"))
+            try
             {
-                Mp3FileReader mp3 = new Mp3FileReader(x);
-                WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(mp3);
-                WaveFileWriter.CreateWaveFile("Musica.wav", pcm);//crea un archivo wav
-                File.Move(Application.StartupPath.ToString() + @"\Musica.wav", Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
+                if (x.ToLower().Contains(".mp3"))
+                {
+                    Mp3FileReader mp3 = new Mp3FileReader(x);
+                    WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(mp3);
+                    WaveFileWriter.CreateWaveFile("Musica.wav", pcm);//crea un archivo wav
+                    File.Move(Application.StartupPath.ToString() + @"\Musica.wav", Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
+                }
+                else { MessageBox.Show("Extensión invalida"); }
             }
-            else { MessageBox.Show("Extensión invalida"); }
+            catch (UnauthorizedAccessException)
+            {
+                AccesoDenegado();
+            }
+
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
@@ -261,6 +284,9 @@ namespace ExpositorDeImagenes
                         file.ShowDialog();
                         ConvertiraWav(file.FileName);
                         file.Dispose();
+                    }
+                    catch (UnauthorizedAccessException) {
+                        AccesoDenegado();
                     }
                     catch (Exception ex)
                     {
@@ -402,18 +428,25 @@ namespace ExpositorDeImagenes
                 Title = "Selecciona tus imagenes a añadir",
                 Multiselect = true
             };
-
-            if (file.ShowDialog() == DialogResult.OK)
+            try
             {
-                string name;
-                foreach (var item in file.FileNames)
+                if (file.ShowDialog() == DialogResult.OK)
                 {
-                    name = item.Split('\\')[item.Split('\\').Count() - 1];
-                    File.Copy(item, Environment.SpecialFolder.MyPictures.ToString() + @"\" + name, true);
+                    string name;
+                    foreach (var item in file.FileNames)
+                    {
+                        name = item.Split('\\')[item.Split('\\').Count() - 1];
+                        File.Copy(item, Environment.SpecialFolder.MyPictures.ToString() + @"\" + name, true);
+                    }
                 }
+                file.Dispose();
+                Actualizar();
             }
-            file.Dispose();
-            Actualizar();
+            catch (UnauthorizedAccessException)
+            {
+                AccesoDenegado();
+            }
+
         }
 
         private void FrmExpositor_FormClosing(object sender, FormClosingEventArgs e)
@@ -437,19 +470,38 @@ namespace ExpositorDeImagenes
                 PicExpositor.BackgroundImage = null;
                 PicExpositor.BackColor = Color.White;
                 List<string> s = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).ToList();
-                foreach (var item in s)
+                try
                 {
-                    File.Delete(item);
+                    path.Clear();
+                    ListaRevision.Clear();
+                    CklLista.Items.Clear();
+                    foreach (var item in s)
+                    {
+                        File.Delete(item);
+                    }
                 }
-                path.Clear();
-                ListaRevision.Clear();
-                CklLista.Items.Clear();
+                catch (UnauthorizedAccessException)
+                {
+                    AccesoDenegado();
+                }
+
             }
         }
 
         private void MúsicaToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            File.Delete(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
+            try
+            {
+                File.Delete(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav");
+            }
+            catch (UnauthorizedAccessException)
+            {
+                AccesoDenegado();
+            }
+        }
+        private void AccesoDenegado()
+        {
+            MessageBox.Show("Acceso denegado para esta acción, verifique si tiene permisos suficientes", "Sin permisos necesarios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
