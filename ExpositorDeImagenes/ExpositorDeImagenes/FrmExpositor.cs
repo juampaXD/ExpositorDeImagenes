@@ -504,6 +504,19 @@ namespace ExpositorDeImagenes
             MessageBox.Show("Acceso denegado para esta acción, verifique si tiene permisos suficientes", "Sin permisos necesarios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        private void FrmExpositor_Resize(object sender, EventArgs e)
+        {
+            /*PicExpositor.Size = new Size(0,0);
+            CklLista.Size = new Size(0, 0);
+            BtnActualizar.Size = new Size(0, 0);
+            BtnMostrarImagen.Size = new Size(0, 0);
+            BtnMusica.Size = new Size(0, 0);
+            ChkMarcadoManual.Size = new Size(0, 0);
+            ChkRepetir.Size = new Size(0, 0);
+            LblPorcentaje.Size = new Size(0, 0);
+            TrbVolumen.Size = new Size(0, 0);*/
+        }
+
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
         {
             NoRepetir = (ChkRepetir.Checked.Equals(true)) ? true : false;

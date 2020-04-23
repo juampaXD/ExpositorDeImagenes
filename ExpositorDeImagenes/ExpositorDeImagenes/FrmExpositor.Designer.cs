@@ -123,6 +123,7 @@
             // TrbVolumen
             // 
             this.TrbVolumen.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TrbVolumen.AutoSize = false;
             this.TrbVolumen.Enabled = false;
             this.TrbVolumen.Location = new System.Drawing.Point(570, 81);
             this.TrbVolumen.Maximum = 100;
@@ -259,12 +260,10 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(644, 413);
-            this.MinimumSize = new System.Drawing.Size(644, 413);
             this.Name = "FrmExpositor";
             this.Text = "Expositor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmExpositor_FormClosing);
+            this.Resize += new System.EventHandler(this.FrmExpositor_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).EndInit();
             this.menuStrip1.ResumeLayout(false);
