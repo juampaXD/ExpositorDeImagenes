@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Media;
+using System.Media;//Nuget para reproducir la música
 using AudioSwitcher.AudioApi.CoreAudio; //Nuget para el control del volumen
 using System.IO;
-using NAudio.Wave;
+using NAudio.Wave;//Nuget para convertir de wav a mp3
 using System.Linq;
+using System.Diagnostics;
 
 namespace ExpositorDeImagenes
 
@@ -24,8 +25,27 @@ namespace ExpositorDeImagenes
         private Random Rand = new Random();
         public FrmExpositor()
         {
+            IsProcessOpen("ExpositorDeImagenes");
             InitializeComponent();
             Iniciar();
+        }
+        public void IsProcessOpen(string name)
+        {
+            int N = 0;
+            foreach (Process clsProcess in Process.GetProcesses())
+            {
+                if (clsProcess.ProcessName.Contains(name))
+                {
+                    N++;
+                }
+            }
+            if (N >= 2)
+            {
+                MessageBox.Show("Aplicación ya se encuentra abierta");
+                this.Close();
+                Application.Exit();
+            }
+            return;
         }
         private void Iniciar()
         {
