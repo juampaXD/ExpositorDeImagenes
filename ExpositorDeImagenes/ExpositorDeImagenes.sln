@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpositorDeImagenes", "Expo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestExpositor", "TestExpositor\TestExpositor.csproj", "{67778F36-F8EB-47C1-A69D-84A39BD88864}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupExpositor", "SetupExpositor\SetupExpositor.vdproj", "{C6A50705-06CE-47D6-9093-99264C2657AB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,8 +20,6 @@ Global
 		{67778F36-F8EB-47C1-A69D-84A39BD88864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{67778F36-F8EB-47C1-A69D-84A39BD88864}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67778F36-F8EB-47C1-A69D-84A39BD88864}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6A50705-06CE-47D6-9093-99264C2657AB}.Debug|Any CPU.ActiveCfg = Debug
-		{C6A50705-06CE-47D6-9093-99264C2657AB}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
