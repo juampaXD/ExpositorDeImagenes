@@ -23,12 +23,14 @@ namespace ExpositorDeImagenes
         private SoundPlayer SoundPlayer;
         private CoreAudioDevice VolumenControl;
         private Random Rand = new Random();
+
         public FrmExpositor()
         {
             IsProcessOpen("ExpositorDeImagenes");
             InitializeComponent();
             Iniciar();
         }
+
         public void IsProcessOpen(string name)
         {
             int N = 0;
@@ -47,6 +49,7 @@ namespace ExpositorDeImagenes
             }
             return;
         }
+
         private void Iniciar()
         {
             CrearCarpetas();
@@ -162,6 +165,7 @@ namespace ExpositorDeImagenes
             }
             MostrarImagen(N);
         }
+
         public int EscogerNumero(int x, List<bool> lista, bool r)
         {
             int N;
@@ -211,17 +215,7 @@ namespace ExpositorDeImagenes
                 MessageBox.Show("imagenes no encontradas");
             }
         }
-        private void BtnMusica_Click(object sender, EventArgs e)
-        {
-            if (Estado == false)
-            {
-                PonerMusica();
-            }
-            else
-            {
-                PararMusica();
-            }
-        }
+
         private void PonerMusica()
         {
             try
@@ -257,6 +251,7 @@ namespace ExpositorDeImagenes
                 }
             }
         }
+
         private void PararMusica()
         {
             try
@@ -268,6 +263,7 @@ namespace ExpositorDeImagenes
             catch (NullReferenceException)
             { }
         }
+
         private void ConvertiraWav(string x)
         {
             try
@@ -286,6 +282,82 @@ namespace ExpositorDeImagenes
                 AccesoDenegado();
             }
 
+        }
+
+        private void AccesoDenegado()
+        {
+            MessageBox.Show("Acceso denegado para esta acción, verifique si tiene permisos suficientes", "Sin permisos necesarios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void CambiarTamaño()
+        {
+            int[] frmporc = new int[2];
+            frmporc[0] = (this.Width * 100) / screen.Bounds.Width;
+            frmporc[1] = (this.Height * 100) / screen.Bounds.Height;
+
+            LblPorcentaje.Text = frmporc[0] + " - " + frmporc[1];
+
+            if (frmporc[0] < 50 || frmporc[1] < 56 || frmporc[0] >= 101 || frmporc[1] >= 98)
+            {
+                if (frmporc[0] < 50 || frmporc[1] < 56)//tamaño inicial
+                {
+                    if (frmporc[0] < 50)
+                    {
+                        PicExpositor.Width = 332;
+                    }
+                    if (frmporc[1] < 56)
+                    {
+                        PicExpositor.Height = 322;
+                    }
+                    return;
+                }
+                //tamaño pantalla completa
+                if (frmporc[0] >= 101 || frmporc[1] >= 98)
+                {
+                    if (frmporc[0] >= 101)
+                    {
+                        PicExpositor.Width = (this.Width * 75) / 100;
+                    }
+                    if (frmporc[1] >= 98)
+                    {
+                        PicExpositor.Height = (this.Height * 75) / 100;
+                    }
+                    return;
+                    //101 98 en pantalla completa
+                }
+            }
+            else
+            {
+                PicExpositor.Width = (644 * frmporc[0]) / 100;
+                PicExpositor.Height = (644 * frmporc[1]) / 100;
+            }
+        }
+
+        private void FrmExpositor_Resize(object sender, EventArgs e)
+        {
+            CambiarTamaño();
+            //PicExpositor.Width = this.Width - 332;
+            //PicExpositor.Height = this.Height - 322;
+            //CklLista.Size = new Size(this.Width - 332, this.Height - 322);
+            //BtnActualizar.Size = new Size(this.Width - 332, this.Height - 322);
+            //BtnMostrarImagen.Size = new Size(this.Width - 332, this.Height - 322);
+            //BtnMusica.Size = new Size(this.Width - 332, this.Height - 322);
+            //ChkMarcadoManual.Size = new Size(this.Width - 332, this.Height - 322);
+            //ChkRepetir.Size = new Size(this.Width - 332, this.Height - 322);
+            //LblPorcentaje.Size = new Size(this.Width - 332, this.Height - 322);
+            //TrbVolumen.Size = new Size(this.Width - 332, this.Height - 322);
+        }
+
+        private void BtnMusica_Click(object sender, EventArgs e)
+        {
+            if (Estado == false)
+            {
+                PonerMusica();
+            }
+            else
+            {
+                PararMusica();
+            }
         }
 
         private void BtnActualizar_Click(object sender, EventArgs e)
@@ -325,6 +397,7 @@ namespace ExpositorDeImagenes
             }
 
         }
+
         private void Actualizar()
         {
             PararMusica();
@@ -472,14 +545,6 @@ namespace ExpositorDeImagenes
 
         }
 
-        private void FrmExpositor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MessageBox.Show("¿Seguro(a) que desea cerrar la aplicación?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
-            {
-                e.Cancel = true;
-            }
-        }
-
         private void ImágenesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Quieres vaciar las imagenes y la lista?", "Limpieza", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -522,73 +587,18 @@ namespace ExpositorDeImagenes
                 AccesoDenegado();
             }
         }
-        private void AccesoDenegado()
-        {
-            MessageBox.Show("Acceso denegado para esta acción, verifique si tiene permisos suficientes", "Sin permisos necesarios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        private void FrmExpositor_Resize(object sender, EventArgs e)
-        {
-            CambiarTamaño();
-            //PicExpositor.Width = this.Width - 332;
-            //PicExpositor.Height = this.Height - 322;
-            //CklLista.Size = new Size(this.Width - 332, this.Height - 322);
-            //BtnActualizar.Size = new Size(this.Width - 332, this.Height - 322);
-            //BtnMostrarImagen.Size = new Size(this.Width - 332, this.Height - 322);
-            //BtnMusica.Size = new Size(this.Width - 332, this.Height - 322);
-            //ChkMarcadoManual.Size = new Size(this.Width - 332, this.Height - 322);
-            //ChkRepetir.Size = new Size(this.Width - 332, this.Height - 322);
-            //LblPorcentaje.Size = new Size(this.Width - 332, this.Height - 322);
-            //TrbVolumen.Size = new Size(this.Width - 332, this.Height - 322);
-        }
-
-        private void CambiarTamaño()
-        {
-            int[] frmporc = new int[2];
-            frmporc[0] = (this.Width * 100) / screen.Bounds.Width;
-            frmporc[1] = (this.Height * 100) / screen.Bounds.Height;
-
-            LblPorcentaje.Text = frmporc[0] + " - " + frmporc[1];
-
-            if (frmporc[0] < 50 || frmporc[1] < 56 || frmporc[0] >= 101 || frmporc[1] >= 98)
-            {
-                if (frmporc[0] < 50 || frmporc[1] < 56)//tamaño inicial
-                {
-                    if (frmporc[0] < 50)
-                    {
-                        PicExpositor.Width = 332;
-                    }
-                    if (frmporc[1] < 56)
-                    {
-                        PicExpositor.Height = 322;
-                    }
-                    return;
-                }
-                //tamaño pantalla completa
-                if (frmporc[0] >= 101 || frmporc[1] >= 98)
-                {
-                    if (frmporc[0] >= 101)
-                    {
-                        PicExpositor.Width = (this.Width * 75) / 100;
-                    }
-                    if (frmporc[1] >= 98)
-                    {
-                        PicExpositor.Height = (this.Height * 75) / 100;
-                    }
-                    return;
-                    //101 98 en pantalla completa
-                }
-            }
-            else
-            {
-                PicExpositor.Width = (644 * frmporc[0]) / 100;
-                PicExpositor.Height = (644 * frmporc[1]) / 100;
-            }
-        }
 
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
         {
             NoRepetir = (ChkRepetir.Checked.Equals(true)) ? true : false;
+        }
+
+        private void FrmExpositor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("¿Seguro(a) que desea cerrar la aplicación?", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
