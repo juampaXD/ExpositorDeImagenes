@@ -13,7 +13,7 @@ Expositor de imágenes de forma aleatoria con reproductor de música de fondo in
 1.  Para la instalación del .net en sistemas operativos w7 toca actualizar a través de Windows update, en caso de que no puedan instalar por medio de algún instalador ya sea el que trae por defecto el instalador o descargado de la página web de Microsoft.
 2.  Para descargar la versión más actual descargarlo desde la sección releases.
 
-#Posibles formas de uso.
+# Posibles formas de uso.
 
 En general el mejor uso es para el aprendizaje por medio de juegos,
 1.  Expositor de imágenes de forma aleatoria.
@@ -21,6 +21,6 @@ En general el mejor uso es para el aprendizaje por medio de juegos,
 3.  Repasar de forma libre para exámenes.
 4.  Reproducir de música de fondo.
 
-#¿a quién le puede ser útil?
+# ¿a quién le puede ser útil?
 * Estudiantes
 * Maestros
