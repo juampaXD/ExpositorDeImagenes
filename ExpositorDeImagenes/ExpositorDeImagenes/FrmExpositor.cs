@@ -14,8 +14,6 @@ namespace ExpositorDeImagenes
 {
     public partial class FrmExpositor : Form
     {
-        //private int[] size = new int[] { 0, 0 };
-        private Screen screen = Screen.PrimaryScreen;
         private List<bool> ListaRevision = new List<bool>();
         List<string> path;
         private Image imagen;
@@ -93,7 +91,7 @@ namespace ExpositorDeImagenes
         {//obtiene los directorios de las imagenes
             try
             {
-                path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).Where(f => f.EndsWith(".GIF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".BMP", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".WMF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".PNG", StringComparison.OrdinalIgnoreCase)).ToList<string>();
+                path = Directory.GetFiles(Environment.SpecialFolder.MyPictures.ToString()).Where(f => f.EndsWith(".GIF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".JPEG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".BMP", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".WMF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".PNG", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".TIF", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".TIFF", StringComparison.OrdinalIgnoreCase)).ToList<string>();
             }
             catch (UnauthorizedAccessException)
             {
