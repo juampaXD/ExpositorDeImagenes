@@ -54,6 +54,9 @@
             // 
             // PicExpositor
             // 
+            this.PicExpositor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PicExpositor.BackColor = System.Drawing.Color.White;
             this.PicExpositor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PicExpositor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -67,6 +70,7 @@
             // 
             // BtnMostrarImagen
             // 
+            this.BtnMostrarImagen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnMostrarImagen.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnMostrarImagen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnMostrarImagen.Location = new System.Drawing.Point(374, 41);
@@ -80,6 +84,7 @@
             // 
             // ChkRepetir
             // 
+            this.ChkRepetir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ChkRepetir.AutoSize = true;
             this.ChkRepetir.Checked = true;
             this.ChkRepetir.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -96,6 +101,7 @@
             // 
             // BtnMusica
             // 
+            this.BtnMusica.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnMusica.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnMusica.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnMusica.Image = ((System.Drawing.Image)(resources.GetObject("BtnMusica.Image")));
@@ -109,6 +115,7 @@
             // 
             // BtnActualizar
             // 
+            this.BtnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnActualizar.BackColor = System.Drawing.Color.LightSkyBlue;
             this.BtnActualizar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("BtnActualizar.Image")));
@@ -122,7 +129,8 @@
             // 
             // TrbVolumen
             // 
-            this.TrbVolumen.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TrbVolumen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TrbVolumen.AutoSize = false;
             this.TrbVolumen.Enabled = false;
             this.TrbVolumen.Location = new System.Drawing.Point(570, 81);
@@ -139,18 +147,21 @@
             // 
             // CklLista
             // 
+            this.CklLista.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CklLista.FormattingEnabled = true;
             this.CklLista.HorizontalScrollbar = true;
-            this.CklLista.Location = new System.Drawing.Point(374, 145);
+            this.CklLista.Location = new System.Drawing.Point(374, 132);
             this.CklLista.Name = "CklLista";
             this.CklLista.ScrollAlwaysVisible = true;
             this.CklLista.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.CklLista.Size = new System.Drawing.Size(178, 214);
+            this.CklLista.Size = new System.Drawing.Size(178, 229);
             this.CklLista.TabIndex = 4;
             this.CklLista.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CklLista_KeyDown);
             // 
             // LblPorcentaje
             // 
+            this.LblPorcentaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.LblPorcentaje.AutoSize = true;
             this.LblPorcentaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblPorcentaje.ForeColor = System.Drawing.Color.White;
@@ -163,6 +174,7 @@
             // 
             // ChkMarcadoManual
             // 
+            this.ChkMarcadoManual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ChkMarcadoManual.AutoSize = true;
             this.ChkMarcadoManual.BackColor = System.Drawing.Color.Black;
             this.ChkMarcadoManual.ForeColor = System.Drawing.Color.White;
@@ -264,7 +276,6 @@
             this.Name = "FrmExpositor";
             this.Text = "Expositor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmExpositor_FormClosing);
-            this.Resize += new System.EventHandler(this.FrmExpositor_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).EndInit();
             this.menuStrip1.ResumeLayout(false);

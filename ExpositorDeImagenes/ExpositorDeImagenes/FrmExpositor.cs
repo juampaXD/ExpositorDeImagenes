@@ -289,65 +289,6 @@ namespace ExpositorDeImagenes
             MessageBox.Show("Acceso denegado para esta acción, verifique si tiene permisos suficientes", "Sin permisos necesarios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
-        private void CambiarTamaño()
-        {
-            int[] frmporc = new int[2];
-            frmporc[0] = (this.Width * 100) / screen.Bounds.Width;
-            frmporc[1] = (this.Height * 100) / screen.Bounds.Height;
-
-            LblPorcentaje.Text = frmporc[0] + " - " + frmporc[1];
-
-            if (frmporc[0] < 50 || frmporc[1] < 56 || frmporc[0] >= 101 || frmporc[1] >= 98)
-            {
-                if (frmporc[0] < 50 || frmporc[1] < 56)//tamaño inicial
-                {
-                    if (frmporc[0] < 50)
-                    {
-                        PicExpositor.Width = 332;
-                    }
-                    if (frmporc[1] < 56)
-                    {
-                        PicExpositor.Height = 322;
-                    }
-                    return;
-                }
-                //tamaño pantalla completa
-                if (frmporc[0] >= 101 || frmporc[1] >= 98)
-                {
-                    if (frmporc[0] >= 101)
-                    {
-                        PicExpositor.Width = (this.Width * 75) / 100;
-                    }
-                    if (frmporc[1] >= 98)
-                    {
-                        PicExpositor.Height = (this.Height * 75) / 100;
-                    }
-                    return;
-                    //101 98 en pantalla completa
-                }
-            }
-            else
-            {
-                PicExpositor.Width = (644 * frmporc[0]) / 100;
-                PicExpositor.Height = (644 * frmporc[1]) / 100;
-            }
-        }
-
-        private void FrmExpositor_Resize(object sender, EventArgs e)
-        {
-            CambiarTamaño();
-            //PicExpositor.Width = this.Width - 332;
-            //PicExpositor.Height = this.Height - 322;
-            //CklLista.Size = new Size(this.Width - 332, this.Height - 322);
-            //BtnActualizar.Size = new Size(this.Width - 332, this.Height - 322);
-            //BtnMostrarImagen.Size = new Size(this.Width - 332, this.Height - 322);
-            //BtnMusica.Size = new Size(this.Width - 332, this.Height - 322);
-            //ChkMarcadoManual.Size = new Size(this.Width - 332, this.Height - 322);
-            //ChkRepetir.Size = new Size(this.Width - 332, this.Height - 322);
-            //LblPorcentaje.Size = new Size(this.Width - 332, this.Height - 322);
-            //TrbVolumen.Size = new Size(this.Width - 332, this.Height - 322);
-        }
-
         private void BtnMusica_Click(object sender, EventArgs e)
         {
             if (Estado == false)
