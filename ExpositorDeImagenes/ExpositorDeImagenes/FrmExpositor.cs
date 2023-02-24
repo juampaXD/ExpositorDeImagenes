@@ -154,7 +154,7 @@ namespace ExpositorDeImagenes
                 {
                     CklLista.SetItemChecked(i, false);//reinicia los checks
                 }
-                MessageBox.Show($"Todas las imagenes se mostraron");
+                MessageBox.Show("Todas las imagenes se mostraron");
                 BtnMostrarImagen.Text = "Mostrar imagen";
                 GenerarLista();//en este limpia la lista de revision
                 PicExpositor.BackgroundImage = null;
@@ -222,12 +222,15 @@ namespace ExpositorDeImagenes
                 {
                     OpenFileDialog file = new OpenFileDialog
                     {
-                        Filter = "Archivos de música(*.mp3) | *.mp3",
+                        Filter = "Archivos de música(*.mp3;*.wav) | *.mp3;*.wav",
                         Title = "Selecciona tu archivo mp3"
                     };
                     if (file.ShowDialog() == DialogResult.OK)
                     {
                         ConvertiraWav(file.FileName);
+                    }
+                    else {
+                        return;
                     }
                     file.Dispose();
                 }
