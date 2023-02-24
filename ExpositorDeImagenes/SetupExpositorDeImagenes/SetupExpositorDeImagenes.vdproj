@@ -15,25 +15,25 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_14EA2DC9902DD6C2AFD71AF6BA028D1A"
+        "MsmKey" = "8:_107FCC3C5BF9EEFCF5FA27B2102EA80B"
         "OwnerKey" = "8:_B5D59248C23D440D8E9AF4243578E3C7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_14EA2DC9902DD6C2AFD71AF6BA028D1A"
-        "OwnerKey" = "8:_40D15E315DE69AAC3E180F43FE6CDA55"
+        "MsmKey" = "8:_107FCC3C5BF9EEFCF5FA27B2102EA80B"
+        "OwnerKey" = "8:_4C4FB763A1668F939717ACDA6F24B9B5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_373193CDBCBBB62165B057FE24513684"
+        "MsmKey" = "8:_46198606AEAB507E3A6FE0EEDEE0C1B9"
         "OwnerKey" = "8:_B5D59248C23D440D8E9AF4243578E3C7"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_40D15E315DE69AAC3E180F43FE6CDA55"
+        "MsmKey" = "8:_4C4FB763A1668F939717ACDA6F24B9B5"
         "OwnerKey" = "8:_B5D59248C23D440D8E9AF4243578E3C7"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -58,19 +58,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_373193CDBCBBB62165B057FE24513684"
+        "OwnerKey" = "8:_46198606AEAB507E3A6FE0EEDEE0C1B9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_40D15E315DE69AAC3E180F43FE6CDA55"
+        "OwnerKey" = "8:_4C4FB763A1668F939717ACDA6F24B9B5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_14EA2DC9902DD6C2AFD71AF6BA028D1A"
+        "OwnerKey" = "8:_107FCC3C5BF9EEFCF5FA27B2102EA80B"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -168,14 +168,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_14EA2DC9902DD6C2AFD71AF6BA028D1A"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_107FCC3C5BF9EEFCF5FA27B2102EA80B"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:AudioSwitcher.AudioApi, Version=2.3.0.173, Culture=neutral, PublicKeyToken=fda5729e2db3a64f, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_14EA2DC9902DD6C2AFD71AF6BA028D1A"
+                    "_107FCC3C5BF9EEFCF5FA27B2102EA80B"
                     {
                     "Name" = "8:AudioSwitcher.AudioApi.dll"
                     "Attributes" = "3:576"
@@ -199,14 +199,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_373193CDBCBBB62165B057FE24513684"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_46198606AEAB507E3A6FE0EEDEE0C1B9"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_373193CDBCBBB62165B057FE24513684"
+                    "_46198606AEAB507E3A6FE0EEDEE0C1B9"
                     {
                     "Name" = "8:NAudio.dll"
                     "Attributes" = "3:576"
@@ -230,14 +230,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_40D15E315DE69AAC3E180F43FE6CDA55"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4C4FB763A1668F939717ACDA6F24B9B5"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:AudioSwitcher.AudioApi.CoreAudio, Version=1.7.0.173, Culture=neutral, PublicKeyToken=fda5729e2db3a64f, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_40D15E315DE69AAC3E180F43FE6CDA55"
+                    "_4C4FB763A1668F939717ACDA6F24B9B5"
                     {
                     "Name" = "8:AudioSwitcher.AudioApi.CoreAudio.dll"
                     "Attributes" = "3:576"
@@ -336,20 +336,20 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:SetupExpositorDeImagenes"
-        "ProductCode" = "8:{F73DE2CB-8DEE-495D-BEC2-6BFCA58C775E}"
-        "PackageCode" = "8:{798AF912-B717-4E6C-9735-8AFC6F3DCF3E}"
+        "ProductName" = "8:ExpositorDeImagenes"
+        "ProductCode" = "8:{31283824-2EF1-417F-B6B6-E12793EAFB35}"
+        "PackageCode" = "8:{3FC5253F-6150-4C94-9107-CC4D0A7432DB}"
         "UpgradeCode" = "8:{37ABAC3E-9AC5-4144-AC1A-1DB1B741191C}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.3.0"
         "Manufacturer" = "8:OpenSJP"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:SetupExpositorDeImagenes"
+        "Title" = "8:ExpositorDeImagenes"
         "Subject" = "8:"
         "ARPCONTACT" = "8:JPXD"
         "Keywords" = "8:"
