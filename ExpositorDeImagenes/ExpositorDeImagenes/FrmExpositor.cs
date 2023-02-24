@@ -222,7 +222,7 @@ namespace ExpositorDeImagenes
                 {
                     OpenFileDialog file = new OpenFileDialog
                     {
-                        Filter = "Archivos de música(*.mp3;*.wav) | *.mp3;*.wav",
+                        Filter = "Archivos (*.mp3;*.wav) | *.mp3;*.wav",
                         Title = "Selecciona tu archivo mp3"
                     };
                     if (file.ShowDialog() == DialogResult.OK)
