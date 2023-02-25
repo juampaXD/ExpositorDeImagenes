@@ -47,6 +47,7 @@
             this.imágenesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.músicaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ChkOrden = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -89,7 +90,7 @@
             this.ChkRepetir.Checked = true;
             this.ChkRepetir.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ChkRepetir.ForeColor = System.Drawing.Color.White;
-            this.ChkRepetir.Location = new System.Drawing.Point(374, 91);
+            this.ChkRepetir.Location = new System.Drawing.Point(374, 94);
             this.ChkRepetir.Name = "ChkRepetir";
             this.ChkRepetir.Size = new System.Drawing.Size(77, 17);
             this.ChkRepetir.TabIndex = 2;
@@ -254,6 +255,23 @@
             this.salirToolStripMenuItem.Text = "Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.SalirToolStripMenuItem_Click);
             // 
+            // ChkOrden
+            // 
+            this.ChkOrden.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ChkOrden.AutoSize = true;
+            this.ChkOrden.Checked = true;
+            this.ChkOrden.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkOrden.ForeColor = System.Drawing.Color.White;
+            this.ChkOrden.Location = new System.Drawing.Point(374, 78);
+            this.ChkOrden.Name = "ChkOrden";
+            this.ChkOrden.Size = new System.Drawing.Size(69, 17);
+            this.ChkOrden.TabIndex = 2;
+            this.ChkOrden.Text = "En orden";
+            this.ChkOrden.UseVisualStyleBackColor = true;
+            this.ChkOrden.CheckedChanged += new System.EventHandler(this.ChkRepetir_CheckedChanged);
+            this.ChkOrden.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChkRepetir_KeyDown);
+            this.ChkOrden.MouseHover += new System.EventHandler(this.ChkRepetir_MouseHover);
+            // 
             // FrmExpositor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -266,6 +284,7 @@
             this.Controls.Add(this.TrbVolumen);
             this.Controls.Add(this.BtnActualizar);
             this.Controls.Add(this.BtnMusica);
+            this.Controls.Add(this.ChkOrden);
             this.Controls.Add(this.ChkRepetir);
             this.Controls.Add(this.BtnMostrarImagen);
             this.Controls.Add(this.PicExpositor);
@@ -304,6 +323,7 @@
         private System.Windows.Forms.ToolStripMenuItem limpiarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imágenesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem músicaToolStripMenuItem1;
+        private System.Windows.Forms.CheckBox ChkOrden;
     }
 }
 

@@ -15,7 +15,7 @@ namespace TestExpositor
         {
             e = new FrmExpositor();
         }
-
+        
         [TestMethod]
         public void TestEscogerNumeroDiferente()
         {//prueba unitaria para escoger números diferentes al que esta activo

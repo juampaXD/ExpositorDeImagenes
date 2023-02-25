@@ -338,7 +338,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ExpositorDeImagenes"
         "ProductCode" = "8:{31283824-2EF1-417F-B6B6-E12793EAFB35}"
-        "PackageCode" = "8:{3FC5253F-6150-4C94-9107-CC4D0A7432DB}"
+        "PackageCode" = "8:{E4E6B440-184F-4208-9040-841A111B31A7}"
         "UpgradeCode" = "8:{37ABAC3E-9AC5-4144-AC1A-1DB1B741191C}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -355,7 +355,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_65B5A0B4BACE4796B613EB08F9D46E88"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -887,7 +887,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B5D59248C23D440D8E9AF4243578E3C7"
             {
-            "SourcePath" = "8:..\\ExpositorDeImagenes\\obj\\Release\\ExpositorDeImagenes.exe"
+            "SourcePath" = "8:..\\ExpositorDeImagenes\\obj\\Debug\\ExpositorDeImagenes.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_FD05DC4403FF4A1EAAA354078A1B9319"

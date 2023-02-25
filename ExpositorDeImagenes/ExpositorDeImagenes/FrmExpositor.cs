@@ -14,7 +14,6 @@ namespace ExpositorDeImagenes
 {
     public partial class FrmExpositor : Form
     {
-        private List<bool> ListaRevision = new List<bool>();
         List<string> path;
         private Image imagen;
         private bool Estado = false, NoRepetir = true; //nos permite revisar si se debe repetir la musica y si esta reproduciendo o no
@@ -53,7 +52,6 @@ namespace ExpositorDeImagenes
             CrearCarpetas();
             CargarPath();
             GenerarLista();
-            RellenarLista();
             PrepararAudios();
         }
 
@@ -101,32 +99,35 @@ namespace ExpositorDeImagenes
 
         private void GenerarLista()
         {//rellena la lista de comprobación
-            if (path.Count != ListaRevision.Count)
+            if (path.Count != CklLista.Items.Count)
             {
                 CklLista.Items.Clear();
-                ListaRevision.Clear();
             }
             if (CklLista.Items.Count == 0)
             {
                 for (int i = 0; i < path.Count; i++)
                 {
-                    ListaRevision.Add(false);
+                    CklLista.Items.Add(path[i].Split('\\')[1], CheckState.Unchecked);
                 }
             }
             else
             {
                 for (int i = 0; i < path.Count; i++)
                 {
-                    ListaRevision[i] = false;
+                    CklLista.Items.Add(path[i].Split('\\')[1], CheckState.Unchecked);
                 }
             }
         }
 
-        private void RellenarLista()
-        {//llena la lista
-            for (int i = 0; i < ListaRevision.Count; i++)
+        private void LimpiarLista()
+        {
+            MessageBox.Show("Todas las imagenes se mostraron");
+            BtnMostrarImagen.Text = "Mostrar imagen";
+            PicExpositor.BackgroundImage = null;
+            imagen.Dispose();
+            for (int i = 0; i < CklLista.Items.Count; i++)
             {
-                CklLista.Items.Add(path[i].Split('\\')[1], CheckState.Unchecked);
+                CklLista.SetItemChecked(i, false);//reinicia los checks existentes
             }
         }
 
@@ -134,47 +135,65 @@ namespace ExpositorDeImagenes
         {
             BtnMostrarImagen.Text = "Cambiar imagen";
 
-            int N = EscogerNumero(CklLista.Items.Count, ListaRevision, NoRepetir);
-            if (N == -1)
+            if (ChkOrden.Checked == true)
             {
-                BtnMostrarImagen.Text = "Mostrar imagen";
-                MessageBox.Show("No hay elementos en la lista", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-            if (ListaRevision.Count(n => n.Equals(true)) >= CklLista.Items.Count - 1)
-            {
-                if (ListaRevision.Count == 0)
+                if (CklLista.CheckedItems.Count == 0)
                 {
-                    BtnMostrarImagen.Text = "Mostrar imagen";
-                    MessageBox.Show("No hay imagenes disponibles para mostrar, añadalas por favor o actualice la lista");
+                    MostrarImagen(0);
                     return;
                 }
-                MostrarImagen(N);
-                for (int i = 0; i < CklLista.Items.Count; i++)
+                if (CklLista.CheckedItems.Count >= CklLista.Items.Count)
                 {
-                    CklLista.SetItemChecked(i, false);//reinicia los checks
+                    LimpiarLista();
+                    MostrarImagen(0);
+                    return;
                 }
-                MessageBox.Show("Todas las imagenes se mostraron");
-                BtnMostrarImagen.Text = "Mostrar imagen";
-                GenerarLista();//en este limpia la lista de revision
-                PicExpositor.BackgroundImage = null;
-                imagen.Dispose();
-                return;
+                foreach (var item in CklLista.CheckedItems)
+                {
+                    for (int i = 0; i < CklLista.Items.Count; i++)
+                    {
+                        if (CklLista.GetItemChecked(i) == false)
+                        {
+                            MostrarImagen(i);
+                            return;
+                        }
+                    }
+                    return;
+                }
             }
-            MostrarImagen(N);
+            else
+            {
+                if (CklLista.CheckedItems.Count >= CklLista.Items.Count)
+                {
+                    LimpiarLista();
+                    return;
+                }
+                else
+                {
+                    if (CklLista.Items.Count == 0)
+                    {
+                        BtnMostrarImagen.Text = "Mostrar imagen";
+                        MessageBox.Show("No hay imagenes disponibles para mostrar, añadalas por favor o actualice la lista", "Lista vacía", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
+                    int N = EscogerNumero(NoRepetir);
+                    MostrarImagen(N);
+                }
+            }
         }
 
-        public int EscogerNumero(int x, List<bool> lista, bool r)
+        public int EscogerNumero(bool r)
         {
+            int x = CklLista.Items.Count;
             int N;
-            if (r)
+            if (r && CklLista.CheckedItems.Count < x)
             {
                 do
                 {
                     N = Rand.Next(0, x);
                     try
                     {
-                        if (lista[N].Equals(false))
+                        if (CklLista.GetItemChecked(N).Equals(false))
                         {
                             break;
                         }
@@ -204,7 +223,6 @@ namespace ExpositorDeImagenes
                 imagen = Image.FromFile(path[x]);
                 PicExpositor.BackgroundImage = imagen;
                 CklLista.SetItemChecked(x, true);
-                ListaRevision[x] = true;
             }
             catch (ArgumentOutOfRangeException)
             { MessageBox.Show("imagenes no encontradas"); }
@@ -218,6 +236,10 @@ namespace ExpositorDeImagenes
         {
             try
             {
+                PrepararAudios();
+                Estado = true;
+                SoundPlayer.PlayLooping();
+                TrbVolumen.Value = VolumenControl.Volume;
                 if (!File.Exists(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav"))
                 {
                     OpenFileDialog file = new OpenFileDialog
@@ -229,15 +251,13 @@ namespace ExpositorDeImagenes
                     {
                         ConvertiraWav(file.FileName);
                     }
-                    else {
+                    else
+                    {
+
                         return;
                     }
-                    file.Dispose();
                 }
-                PrepararAudios();
-                Estado = true;
-                SoundPlayer.PlayLooping();
-                TrbVolumen.Value = VolumenControl.Volume;
+
             }
             catch (NullReferenceException)
             { return; }
@@ -304,6 +324,26 @@ namespace ExpositorDeImagenes
 
         private void BtnActualizar_Click(object sender, EventArgs e)
         {
+            Actualizar();
+        }
+        private void Actualizar()
+        {
+            PararMusica();
+            CrearCarpetas();
+            PicExpositor.BackColor = Color.White;
+            Actualizar_imagenes();
+            Actualizar_musica();
+        }
+
+        private void Actualizar_imagenes()
+        {
+            path.Clear();
+            CklLista.Items.Clear();
+            CargarPath();
+            GenerarLista();
+        }
+        private void Actualizar_musica()
+        {
             if (File.Exists(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav"))
             {
                 if (MessageBox.Show("¿Desea actualizar la música de fondo?", "actualizar musica", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -329,7 +369,6 @@ namespace ExpositorDeImagenes
                     {
                         MessageBox.Show("Error no controlado" + ex.Message);
                     }
-                    Actualizar();
                     PonerMusica();
                     if (TrbVolumen.Value == 0)
                     {
@@ -338,18 +377,6 @@ namespace ExpositorDeImagenes
                 }
             }
 
-        }
-
-        private void Actualizar()
-        {
-            PararMusica();
-            PicExpositor.BackColor = Color.White;
-            ListaRevision.Clear();
-            CklLista.Items.Clear();
-            path.Clear();
-            CargarPath();
-            GenerarLista();
-            RellenarLista();
         }
 
         private void TrbVolumen_Scroll(object sender, EventArgs e)
@@ -362,7 +389,7 @@ namespace ExpositorDeImagenes
             {
                 if (ex is ArgumentOutOfRangeException || ex is IndexOutOfRangeException)
                 {
-                    VolumenControl.Volume = 0;
+                    //VolumenControl.Volume = 0;
                 }
             }
 
@@ -426,12 +453,10 @@ namespace ExpositorDeImagenes
                 if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(true))
                 {
                     CklLista.SetItemChecked(CklLista.SelectedIndex, false);
-                    ListaRevision[CklLista.SelectedIndex] = false;
                 }
                 else if (e.KeyValue.Equals(13) && CklLista.SelectionMode == SelectionMode.One && CklLista.GetItemChecked(CklLista.SelectedIndex).Equals(false))
                 {
                     CklLista.SetItemChecked(CklLista.SelectedIndex, true);
-                    ListaRevision[CklLista.SelectedIndex] = true;
                 }
             }
             catch (ArgumentOutOfRangeException) { }
@@ -484,7 +509,6 @@ namespace ExpositorDeImagenes
             {
                 AccesoDenegado();
             }
-
         }
 
         private void ImágenesToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -503,7 +527,6 @@ namespace ExpositorDeImagenes
                 try
                 {
                     path.Clear();
-                    ListaRevision.Clear();
                     CklLista.Items.Clear();
                     foreach (var item in s)
                     {
