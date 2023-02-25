@@ -25,6 +25,7 @@ namespace ExpositorDeImagenes
         {
             IsProcessOpen("ExpositorDeImagenes");
             InitializeComponent();
+            PrepararAudios();
             Iniciar();
         }
 
@@ -52,7 +53,6 @@ namespace ExpositorDeImagenes
             CrearCarpetas();
             CargarPath();
             GenerarLista();
-            PrepararAudios();
         }
 
         private void PrepararAudios()
@@ -61,6 +61,7 @@ namespace ExpositorDeImagenes
             {
                 SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
                 VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
+                
                 TrbVolumen.Enabled = true;
                 TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
             }
@@ -73,7 +74,7 @@ namespace ExpositorDeImagenes
             {
                 if (e is ArgumentOutOfRangeException || e is IndexOutOfRangeException)
                 {
-                    TrbVolumen.Value = 0;
+                    TrbVolumen.Value = 10;
                     LblPorcentaje.Text = TrbVolumen.Value + " %";
                 }
             }
@@ -236,10 +237,11 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                PrepararAudios();
+                //PrepararAudios();
                 Estado = true;
                 SoundPlayer.PlayLooping();
                 TrbVolumen.Value = VolumenControl.Volume;
+                
                 if (!File.Exists(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav"))
                 {
                     OpenFileDialog file = new OpenFileDialog
@@ -253,7 +255,6 @@ namespace ExpositorDeImagenes
                     }
                     else
                     {
-
                         return;
                     }
                 }
@@ -265,7 +266,8 @@ namespace ExpositorDeImagenes
             {
                 if (ex is FileNotFoundException)
                 {
-                    TrbVolumen.Value = 0;
+                    MessageBox.Show("volumen" + VolumenControl.Volume);
+                    TrbVolumen.Value = 10;
                     LblPorcentaje.Text = TrbVolumen.Value + "%";
                     MessageBox.Show("Archivo de musica no encontrado");
                     Estado = false;
@@ -389,11 +391,10 @@ namespace ExpositorDeImagenes
             {
                 if (ex is ArgumentOutOfRangeException || ex is IndexOutOfRangeException)
                 {
-                    //VolumenControl.Volume = 0;
+                    LblPorcentaje.Text = 10 + " %";
                 }
             }
-
-            LblPorcentaje.Text = TrbVolumen.Value + " %";
+            LblPorcentaje.Text = VolumenControl.Volume + " %";
         }
 
         private void ChkMarcadoManual_CheckedChanged(object sender, EventArgs e)
