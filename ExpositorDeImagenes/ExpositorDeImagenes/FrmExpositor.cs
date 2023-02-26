@@ -249,6 +249,10 @@ namespace ExpositorDeImagenes
                     {
                         ConvertiraWav(file.FileName);
                     }
+                    else
+                    {
+                        return;
+                    }
                     file.Dispose();
                 }
                 Estado = true;
