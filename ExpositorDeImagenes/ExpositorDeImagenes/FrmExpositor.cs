@@ -136,7 +136,6 @@ namespace ExpositorDeImagenes
         private void BtnMostrarImagen_Click(object sender, EventArgs e)
         {
             BtnMostrarImagen.Text = "Cambiar imagen";
-
             if (ChkOrden.Checked == true)
             {
                 if (CklLista.CheckedItems.Count == 0)
@@ -227,10 +226,14 @@ namespace ExpositorDeImagenes
                 CklLista.SetItemChecked(x, true);
             }
             catch (ArgumentOutOfRangeException)
-            { MessageBox.Show("imagenes no encontradas"); }
+            {
+                MessageBox.Show("imagenes no encontradas");
+                BtnMostrarImagen.Text = "Mostrar imagen";
+            }
             catch (FileNotFoundException)
             {
                 MessageBox.Show("imagenes no encontradas");
+                BtnMostrarImagen.Text = "Mostrar imagen";
             }
         }
 
