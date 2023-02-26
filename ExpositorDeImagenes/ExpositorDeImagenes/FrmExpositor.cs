@@ -18,6 +18,7 @@ namespace ExpositorDeImagenes
         private Image imagen;
         private bool Estado = false, NoRepetir = true; //nos permite revisar si se debe repetir la musica y si esta reproduciendo o no
         private SoundPlayer SoundPlayer;
+        private CoreAudioController controller;
         private CoreAudioDevice VolumenControl;
         private Random Rand = new Random();
 
@@ -59,11 +60,12 @@ namespace ExpositorDeImagenes
         {
             try
             {
+                controller = new CoreAudioController();
                 SoundPlayer = new SoundPlayer(Directory.GetFiles(Environment.SpecialFolder.MyMusic.ToString(), "*.wav")[0]);
-                VolumenControl = new CoreAudioController().DefaultPlaybackDevice;
-                
+                VolumenControl = controller.DefaultPlaybackDevice;
                 TrbVolumen.Enabled = true;
-                TrbVolumen.Value = int.Parse(VolumenControl.Volume.ToString());
+                TrbVolumen.Value = VolumenControl.Volume;
+                LblPorcentaje.Text = TrbVolumen.Value.ToString() + " %";
             }
             catch (NullReferenceException) { MessageBox.Show("Dispositivo de reprodución no encontrado o no instalado"); }
             catch (UnauthorizedAccessException)
@@ -74,7 +76,6 @@ namespace ExpositorDeImagenes
             {
                 if (e is ArgumentOutOfRangeException || e is IndexOutOfRangeException)
                 {
-                    TrbVolumen.Value = 10;
                     LblPorcentaje.Text = TrbVolumen.Value + " %";
                 }
             }
@@ -237,11 +238,6 @@ namespace ExpositorDeImagenes
         {
             try
             {
-                //PrepararAudios();
-                Estado = true;
-                SoundPlayer.PlayLooping();
-                TrbVolumen.Value = VolumenControl.Volume;
-                
                 if (!File.Exists(Environment.SpecialFolder.MyMusic.ToString() + @"\Musica.wav"))
                 {
                     OpenFileDialog file = new OpenFileDialog
@@ -253,12 +249,11 @@ namespace ExpositorDeImagenes
                     {
                         ConvertiraWav(file.FileName);
                     }
-                    else
-                    {
-                        return;
-                    }
+                    file.Dispose();
                 }
-
+                Estado = true;
+                SoundPlayer.PlayLooping();
+                TrbVolumen.Value = VolumenControl.Volume;
             }
             catch (NullReferenceException)
             { return; }
@@ -266,8 +261,6 @@ namespace ExpositorDeImagenes
             {
                 if (ex is FileNotFoundException)
                 {
-                    MessageBox.Show("volumen" + VolumenControl.Volume);
-                    TrbVolumen.Value = 10;
                     LblPorcentaje.Text = TrbVolumen.Value + "%";
                     MessageBox.Show("Archivo de musica no encontrado");
                     Estado = false;
@@ -374,7 +367,7 @@ namespace ExpositorDeImagenes
                     PonerMusica();
                     if (TrbVolumen.Value == 0)
                     {
-                        TrbVolumen.Value = 5;
+                        TrbVolumen.Value = 0;
                     }
                 }
             }
@@ -386,15 +379,15 @@ namespace ExpositorDeImagenes
             try
             {
                 VolumenControl.Volume = TrbVolumen.Value;
+                LblPorcentaje.Text = TrbVolumen.Value + " %";
             }
             catch (Exception ex)
             {
                 if (ex is ArgumentOutOfRangeException || ex is IndexOutOfRangeException)
                 {
-                    LblPorcentaje.Text = 10 + " %";
+                    //VolumenControl.Volume = 0;
                 }
             }
-            LblPorcentaje.Text = VolumenControl.Volume + " %";
         }
 
         private void ChkMarcadoManual_CheckedChanged(object sender, EventArgs e)
@@ -557,6 +550,38 @@ namespace ExpositorDeImagenes
         private void ChkRepetir_CheckedChanged(object sender, EventArgs e)
         {
             NoRepetir = (ChkRepetir.Checked.Equals(true)) ? true : false;
+        }
+
+        private void FrmExpositor_Deactivate(object sender, EventArgs e)
+        {
+            try
+            {
+                TrbVolumen.Value = VolumenControl.Volume;
+                LblPorcentaje.Text = TrbVolumen.Value + " %";
+            }
+            catch (Exception ex)
+            {
+                if (ex is ArgumentOutOfRangeException || ex is IndexOutOfRangeException)
+                {
+                    return;
+                }
+            }
+        }
+
+        private void FrmExpositor_Activated(object sender, EventArgs e)
+        {
+            try
+            {
+                TrbVolumen.Value = VolumenControl.Volume;
+                LblPorcentaje.Text = TrbVolumen.Value + " %";
+            }
+            catch (Exception ex)
+            {
+                if (ex is ArgumentOutOfRangeException || ex is IndexOutOfRangeException)
+                {
+                    return;
+                }
+            }
         }
 
         private void FrmExpositor_FormClosing(object sender, FormClosingEventArgs e)

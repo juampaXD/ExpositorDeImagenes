@@ -133,7 +133,6 @@
             this.TrbVolumen.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TrbVolumen.AutoSize = false;
-            this.TrbVolumen.Enabled = false;
             this.TrbVolumen.Location = new System.Drawing.Point(570, 81);
             this.TrbVolumen.Maximum = 100;
             this.TrbVolumen.Name = "TrbVolumen";
@@ -294,6 +293,8 @@
             this.MinimumSize = new System.Drawing.Size(644, 413);
             this.Name = "FrmExpositor";
             this.Text = "Expositor";
+            this.Activated += new System.EventHandler(this.FrmExpositor_Activated);
+            this.Deactivate += new System.EventHandler(this.FrmExpositor_Deactivate);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmExpositor_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.PicExpositor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrbVolumen)).EndInit();
