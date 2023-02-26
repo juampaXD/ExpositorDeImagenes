@@ -117,7 +117,7 @@
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
-        "Compression" = "3:2"
+        "Compression" = "3:3"
         "SignOutput" = "11:FALSE"
         "CertificateFile" = "8:"
         "PrivateKeyFile" = "8:"
@@ -887,7 +887,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B5D59248C23D440D8E9AF4243578E3C7"
             {
-            "SourcePath" = "8:..\\ExpositorDeImagenes\\obj\\Debug\\ExpositorDeImagenes.exe"
+            "SourcePath" = "8:..\\ExpositorDeImagenes\\obj\\Release\\ExpositorDeImagenes.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_FD05DC4403FF4A1EAAA354078A1B9319"
